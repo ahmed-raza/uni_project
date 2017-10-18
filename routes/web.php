@@ -12,5 +12,6 @@
 */
 
 Route::get('/', 'PagesController@home')->name('home');
+Route::resource('ads', 'AdsController');
 
 Auth::routes();
