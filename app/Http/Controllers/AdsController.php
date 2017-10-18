@@ -12,4 +12,9 @@ class AdsController extends Controller
 
     return view('ads.index', compact('ads'));
   }
+  public function show($id) {
+    $ad = Ad::findOrFail($id);
+
+    return view('ads.show', compact('ad'));
+  }
 }
