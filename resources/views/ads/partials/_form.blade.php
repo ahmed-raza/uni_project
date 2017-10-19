@@ -7,7 +7,7 @@
   <div class="col-lg-6">
     <div class="form-group">
       {!! Form::label('category') !!}
-      {!! Form::text('category', null, ['class'=>'form-control']) !!}
+      {!! Form::select('category', $categories, null, ['class'=>'form-control']) !!}
     </div>
   </div>
   <div class="col-lg-6">
