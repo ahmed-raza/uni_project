@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-lg-12">
           <h3>{{ Html::link(route('ads.show',$ad->id), $ad->title) }}</h3>
-          <p>{{ $ad->description }}</p>
+          {!! str_limit($ad->description, 200) !!}
         </div>
       </div>
     @endforeach
