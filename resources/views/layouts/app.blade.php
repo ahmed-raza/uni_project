@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {!! Html::script('ckeditor/ckeditor.js') !!}
 </head>
 <body>
     <div id="app">
@@ -41,6 +42,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+                        <li class={{ Request::is('ads/create') ? 'active' : '' }}><a href="{{ route('ads.create') }}">Post an Ad</a></li>
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
@@ -70,7 +72,9 @@
                 </div>
             </div>
         </nav>
-
+        <div class="container">
+            @include('partials.messages')
+        </div>
         @yield('content')
     </div>
 
