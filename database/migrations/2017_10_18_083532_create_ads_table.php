@@ -18,6 +18,7 @@ class CreateAdsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('title');
             $table->string('slug');
+            $table->integer('category_id')->unsigned();
             $table->string('city');
             $table->text('images');
             $table->text('description');
@@ -27,6 +28,11 @@ class CreateAdsTable extends Migration
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users')
+                    ->onDelete('cascade');
+
+            $table->foreign('category_id')
+                    ->references('id')
+                    ->on('categories')
                     ->onDelete('cascade');
         });
     }
