@@ -31,4 +31,9 @@ class AdsController extends Controller
     $ad = Auth::user()->ads()->create($request->all());
     return redirect(route('ads.show', $ad->id))->with('message','Your ad has been posted.');
   }
+  public function edit($id) {
+    $ad = Ad::findOrFail($id);
+    $categories = Category::pluck('category', 'id');
+    return view('ads.edit', compact('ad','categories'));
+  }
 }
