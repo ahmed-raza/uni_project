@@ -11,7 +11,7 @@ use Auth;
 class AdsController extends Controller
 {
   public function index() {
-    $ads = Ad::all();
+    $ads = Ad::latest('created_at')->approved()->get();
     return view('ads.index', compact('ads'));
   }
   public function show($slug) {
