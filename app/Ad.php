@@ -14,4 +14,7 @@ class Ad extends Model
   public function category(){
     return $this->belongsTo('App\Category');
   }
+  public function scopeApproved($query){
+    $query->where('approve', 1);
+  }
 }
