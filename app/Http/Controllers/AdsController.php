@@ -15,9 +15,8 @@ class AdsController extends Controller
 
     return view('ads.index', compact('ads'));
   }
-  public function show($id) {
-    $ad = Ad::findOrFail($id);
-
+  public function show($slug) {
+    $ad = Ad::where('slug', $slug)->first();
     return view('ads.show', compact('ad'));
   }
   public function create() {
