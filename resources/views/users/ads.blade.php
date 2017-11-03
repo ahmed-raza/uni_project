@@ -18,11 +18,11 @@
           <tr class="{{ $ad->approve ? 'success' : 'danger' }}">
             <td>{{ Html::link(route('ads.show', $ad->slug), $ad->title) }}</td>
             <td>{!! str_limit($ad->description, 100) !!}</td>
-            <td>{{ Html::link(route('ads.edit', $ad->id), 'Edit') }} | Delete</td>
+            <td>
+              {{ Html::link(route('ads.edit', $ad->id), 'Edit') }} | {{ Html::link(route('ads.delete', $ad->id), 'Delete') }}</td>
           </tr>
         @endforeach
       </tbody>
     </table>
   </div>
-
 @stop
