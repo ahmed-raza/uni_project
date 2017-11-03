@@ -12,7 +12,8 @@
 */
 
 Route::get('/', 'PagesController@home')->name('home');
-Route::get('my-ads', 'UsersController@ads')->name('user_ads');
+Route::get('my-ads', 'UsersController@ads')->name('user.ads');
 Route::resource('ads', 'AdsController');
+Route::get('ads/{id}/delete', 'AdsController@delete')->name('ads.delete');
 
 Auth::routes();
