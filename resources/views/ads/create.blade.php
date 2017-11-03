@@ -7,7 +7,7 @@
     <h1>Post an Ad</h1>
       
     {!! Form::open(['url'=>route('ads.store'), 'method'=>'POST']) !!}
-      @include('ads.partials._form')
+      @include('ads.partials._form', ['edit' => false])
     {!! Form::close() !!}
 
   </div>
