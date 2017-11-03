@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}"></script>
     {!! Html::script('ckeditor/ckeditor.js') !!}
 </head>
 <body>
@@ -54,7 +55,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ route('user_ads') }}">My Ads</a></li>
+                                    <li><a href="{{ route('user.ads') }}">My Ads</a></li>
                                     <li class="divider"></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -81,6 +82,5 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
