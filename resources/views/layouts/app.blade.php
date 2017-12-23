@@ -12,7 +12,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('flexslider/flexslider.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="flexslider/jquery.flexslider.js"></script>
     {!! Html::script('ckeditor/ckeditor.js') !!}
 </head>
 <body>
