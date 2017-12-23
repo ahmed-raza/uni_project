@@ -26,5 +26,17 @@
   {!! Form::file('images', ['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
+  <div class="row">
+    <div class="col-lg-6">
+    {!! Form::label('Phone') !!}
+    {!! Form::text('phone', null,['class'=>'form-control']) !!}
+    </div>
+    <div class="col-lg-6">
+      {!! Form::label('Email') !!}
+      {!! Form::text('email', null,['class'=>'form-control']) !!}
+    </div>
+  </div>
+</div>
+<div class="form-group">
   {!! Form::submit('Post', ['class'=>'btn btn-block btn-primary']) !!}
 </div>
