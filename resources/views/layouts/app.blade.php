@@ -47,6 +47,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <li class={{ Request::is('ads/create') ? 'active' : '' }}><a href="{{ route('ads.create') }}">Post an Ad</a></li>
+                        <li class={{ Request::is('admin/dashboard') ? 'active' : '' }}><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>

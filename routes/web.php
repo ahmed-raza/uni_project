@@ -17,4 +17,8 @@ Route::get('profile', 'UsersController@profile')->name('user.profile');
 Route::resource('ads', 'AdsController');
 Route::get('ads/{id}/delete', 'AdsController@delete')->name('ads.delete');
 
+Route::group(['prefix'=>'admin'], function(){
+  Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+});
+
 Auth::routes();
