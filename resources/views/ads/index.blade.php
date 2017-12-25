@@ -6,38 +6,22 @@
     <h1>Ads</h1>
     <div class="row">
       <div class="col-lg-9">
-        @foreach($ads as $ad)
-        <div class="row ads">
-          <div class="col-lg-3">
-            <img src="dining.jpg" alt="#" height="140" width="200">
+        @if($ads == null)
+          @foreach($ads as $ad)
+          <div class="row ads">
+            <div class="col-lg-3">
+              <img src="dining.jpg" alt="#" height="140" width="200">
+            </div>
+            <div class="col-lg-9">
+              <h3>{{ Html::link(route('ads.show',$ad->slug), $ad->title) }}</h3>
+              <em>18 December 2017</em>
+              {!! str_limit($ad->description, 200) !!}
+            </div>
           </div>
-          <div class="col-lg-9">
-            <h3>{{ Html::link(route('ads.show',$ad->slug), $ad->title) }}</h3>
-            <em>18 December 2017</em>
-            {!! str_limit($ad->description, 200) !!}
-          </div>
-        </div>
-        @endforeach
-        <div class="row ads">
-          <div class="col-lg-3">
-            <img src="dining.jpg" alt="#" height="140" width="200">
-          </div>
-          <div class="col-lg-9">
-            <h3>{{ Html::link(route('ads.show',$ad->slug), $ad->title) }}</h3>
-            <em>18 December 2017</em>
-            {!! str_limit($ad->description, 200) !!}
-          </div>
-        </div>
-        <div class="row ads">
-          <div class="col-lg-3">
-            <img src="dining.jpg" alt="#" height="140" width="200">
-          </div>
-          <div class="col-lg-9">
-            <h3>{{ Html::link(route('ads.show',$ad->slug), $ad->title) }}</h3>
-            <em>18 December 2017</em>
-            {!! str_limit($ad->description, 200) !!}
-          </div>
-        </div>
+          @endforeach
+        @else
+          <p>No ads found.</p>
+        @endif
       </div>
       <div class="col-lg-3">
         <fieldset>
