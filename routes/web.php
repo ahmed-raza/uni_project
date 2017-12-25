@@ -13,7 +13,7 @@
 
 Route::get('/', 'PagesController@home')->name('home');
 Route::get('my-ads', 'UsersController@ads')->name('user.ads');
-Route::get('profile', 'UsersController@profile')->name('user.profile');
+Route::get('user/profile', 'UsersController@profile')->name('user.profile');
 Route::resource('ads', 'AdsController');
 Route::get('ads/{id}/delete', 'AdsController@delete')->name('ads.delete');
 
