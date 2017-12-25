@@ -10,6 +10,9 @@ use Auth;
 
 class AdsController extends Controller
 {
+  public function __construct() {
+    $this->middleware('auth', ['except'=>['show', 'index']]);
+  }
   public function index() {
     $ads = Ad::latest('created_at')->approved()->get();
     return view('ads.index', compact('ads'));
