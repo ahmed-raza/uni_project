@@ -7,7 +7,7 @@
   <div class="col-lg-6">
     <div class="form-group">
       {!! Form::label('category') !!}
-      {!! Form::select('category', $categories, $edit ? $ad->category->id : null, ['class'=>'form-control']) !!}
+      {!! Form::select('category_id', $categories, $edit ? $ad->category->id : null, ['class'=>'form-control']) !!}
     </div>
   </div>
   <div class="col-lg-6">
@@ -26,6 +26,10 @@
   {!! Form::file('images', ['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
+  {!! Form::checkbox('contact_info', 1, false, ['id'=>'contact_info']) !!}
+  {!! Form::label('contact_info', 'Pull my contact info from my profile.') !!}
+</div>
+<div class="form-group custom-contact-info">
   <div class="row">
     <div class="col-lg-6">
     {!! Form::label('Phone') !!}
@@ -40,3 +44,14 @@
 <div class="form-group">
   {!! Form::submit('Post', ['class'=>'btn btn-block btn-primary']) !!}
 </div>
+<script type="text/javascript">
+  if($('input#contact_info').is(':checked')) {
+    $('.custom-contact-info').hide();
+  }
+  $('input#contact_info').change(function(){
+    $('.custom-contact-info').show();
+    if(this.checked) {
+      $('.custom-contact-info').hide();
+    }
+  });
+</script>
