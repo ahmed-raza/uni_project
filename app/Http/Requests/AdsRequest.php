@@ -25,9 +25,11 @@ class AdsRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'category' => 'required',
+            'category_id' => 'required',
             'city' => 'required',
             'description' => 'required',
+            'phone'  => $this->input('contact_info') ? '' : 'required',
+            'email'  => $this->input('contact_info') ? '' : 'required'
         ];
     }
 }
