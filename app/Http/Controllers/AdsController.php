@@ -22,15 +22,15 @@ class AdsController extends Controller
     return view('ads.show', compact('ad'));
   }
   public function create() {
-    $categories = Category::pluck('category', 'id');
+    $categories = Category::pluck('name', 'id');
     return view('ads.create', compact('categories'));
   }
   public function store(AdsRequest $request) {
     $slug = str_slug($request->input('title'), "-");
     $images = "";
-    $request->request->add(['slug'=>$slug, 'images'=>$images,'category_id'=>$request->input('category')]);
+    $request->request->add(['slug'=>$slug, 'images'=>$images,'category_id'=>$request->input('category_id')]);
     $ad = Auth::user()->ads()->create($request->all());
-    return redirect(route('ads.show', $ad->slug))->with('message','Your ad has been posted.');
+    return redirect(route('ads.show', $ad->slug))->with('message','Your ad has been created, an admin will approve it after reviewing.');
   }
   public function edit($id) {
     $ad = Ad::findOrFail($id);
