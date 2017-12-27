@@ -54,7 +54,7 @@
     <div class="col-lg-4">
       <div class="well">
         <h3>Categories</h3>
-        <a href="#" class="btn btn-primary btn-xs">Add Categoryz</a>
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryModal" data-whatever="@mdo">Add Category</button>
         <ul class="nav">
           <li><a href="#">Real Estate <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
           <li><a href="#">Furniture <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
@@ -68,5 +68,10 @@
     </div>
   </div>
 </div>
+
+
+{!! Form::open(['url'=>route('category.store')]) !!}
+  @include('admin.categories.partials._form', ['edit'=>false, 'title'=>'Add Category'])
+{!! Form::close() !!}
 
 @stop
