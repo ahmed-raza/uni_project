@@ -63,7 +63,7 @@
           <li><a href="#">Home Appliances <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
           <li><a href="#">Electronics <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
         </ul>
-        <a href="#" class="btn btn-sm btn-success">View All</a>
+        <a href="{{ route('category.index') }}" class="btn btn-sm btn-success">View All</a>
       </div>
     </div>
   </div>
