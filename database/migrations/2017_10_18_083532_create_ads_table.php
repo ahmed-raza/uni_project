@@ -22,6 +22,9 @@ class CreateAdsTable extends Migration
             $table->string('city');
             $table->text('images');
             $table->text('description');
+            $table->boolean('contact_info')->default(0);
+            $table->bigInteger('phone');
+            $table->string('email');
             $table->boolean('approve')->default(0);
             $table->timestamps();
 
