@@ -26,12 +26,9 @@
         <h3>Ads</h3>
         <a href="#" class="btn btn-primary btn-xs">Post Ad</a>
         <ul class="nav">
-          <li><a href="#">Furniture For sale</a></li>
-          <li><a href="#">Ut in fugiat irure.</a></li>
-          <li><a href="#">Elit nisi non.</a></li>
-          <li><a href="#">Consectetur ut in.</a></li>
-          <li><a href="#">Dolor do sunt occaecat veniam.</a></li>
-          <li><a href="#">Ea laborum magna commodo.</a></li>
+          @foreach ($ads as $ad)
+            <li><a href="#">{{ $ad->title }}</a></li>
+          @endforeach
         </ul>
         <a href="#" class="btn btn-sm btn-success">View All</a>
       </div>
