@@ -1,8 +1,17 @@
-<div class="form-group">
-  {!! Form::label('title') !!}
-  {!! Form::text('title', null, ['class'=>'form-control']) !!}
+<div class="row">
+  <div class="col-lg-6">
+    <div class="form-group">
+      {!! Form::label('title') !!}
+      {!! Form::text('title', null, ['class'=>'form-control']) !!}
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="form-group">
+      {!! Form::label('price') !!}
+      {!! Form::number('price', null, ['class'=>'form-control', 'min'=>'1000']) !!}
+    </div>
+  </div>
 </div>
-
 <div class="row">
   <div class="col-lg-6">
     <div class="form-group">
@@ -26,7 +35,7 @@
   {!! Form::file('images', ['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('contact_info', 1, false, ['id'=>'contact_info']) !!}
+  {!! Form::checkbox('contact_info', 1, $edit ? $ad->contact_info : false, ['id'=>'contact_info']) !!}
   {!! Form::label('contact_info', 'Pull my contact info from my profile.') !!}
 </div>
 <div class="form-group custom-contact-info">

@@ -21,47 +21,41 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-4 ads">
       <div class="well">
         <h3>Ads</h3>
         <a href="#" class="btn btn-primary btn-xs">Post Ad</a>
         <ul class="nav">
-          <li><a href="#">Furniture For sale <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Ut in fugiat irure. <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Elit nisi non. <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Consectetur ut in. <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Dolor do sunt occaecat veniam. <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Ea laborum magna commodo. <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
+          <li><a href="#">Furniture For sale</a></li>
+          <li><a href="#">Ut in fugiat irure.</a></li>
+          <li><a href="#">Elit nisi non.</a></li>
+          <li><a href="#">Consectetur ut in.</a></li>
+          <li><a href="#">Dolor do sunt occaecat veniam.</a></li>
+          <li><a href="#">Ea laborum magna commodo.</a></li>
         </ul>
         <a href="#" class="btn btn-sm btn-success">View All</a>
       </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-4 users">
       <div class="well">
         <h3>Users</h3>
         <a href="#" class="btn btn-primary btn-xs">Add User</a>
         <ul class="nav">
-          <li><a href="#">Ahmed <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Raza <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Qasim <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Ali <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Salma <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Saleem <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
+          @foreach ($users as $user)
+            <li><a href="#">{{ $user->name }}</a></li>
+          @endforeach
         </ul>
         <a href="#" class="btn btn-sm btn-success">View All</a>
       </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-4 categories">
       <div class="well">
         <h3>Categories</h3>
-        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryModal" data-whatever="@mdo">Add Category</button>
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryModal">Add Category</button>
         <ul class="nav">
-          <li><a href="#">Real Estate <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Furniture <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Cars <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Motorbikes <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Home Appliances <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
-          <li><a href="#">Electronics <button class="btn btn-xs btn-warning pull-right">Delete</button><button class="btn btn-xs btn-warning pull-right">Edit</button></a></li>
+          @foreach ($categories as $category)
+          <li><a href="#">{{ $category->name }}</a></li>
+          @endforeach
         </ul>
         <a href="{{ route('category.index') }}" class="btn btn-sm btn-success">View All</a>
       </div>
@@ -70,7 +64,7 @@
 </div>
 
 
-{!! Form::open(['url'=>route('category.store')]) !!}
+{!! Form::open(['url'=>route('category.store'), 'method'=>'POST']) !!}
   @include('admin.categories.partials._form', ['edit'=>false, 'title'=>'Add Category'])
 {!! Form::close() !!}
 
