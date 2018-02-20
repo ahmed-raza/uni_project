@@ -17,7 +17,8 @@ class Ad extends Model
     'approve',
     'contact_info',
     'email',
-    'phone'
+    'phone',
+    'price'
     ];
 
   public function user() {
