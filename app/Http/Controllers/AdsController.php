@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\AdsRequest;
 use App\Category;
 use App\Ad;
@@ -28,14 +29,29 @@ class AdsController extends Controller
   public function store(AdsRequest $request) {
     $slug = str_slug($request->input('title'), "-");
     $images = "";
-    $request->request->add(['slug'=>$slug, 'images'=>$images,'category_id'=>$request->input('category_id')]);
+    $phone = 0;
+    $email = "";
+    if (!$request->input('contact_info')) {
+      $phone = $request->input('phone');
+      $email = $request->input('email');
+    }
+    $request->request->add([
+      'slug'        => $slug,
+      'phone'       => $phone,
+      'email'       => $email,
+      'images'      => $images,
+      'category_id' => $request->input('category_id'),
+    ]);
     $ad = Auth::user()->ads()->create($request->all());
     return redirect(route('ads.show', $ad->slug))->with('message','Your ad has been created, an admin will approve it after reviewing.');
   }
   public function edit($id) {
     $ad = Ad::findOrFail($id);
-    $categories = Category::pluck('category', 'id');
-    return view('ads.edit', compact('ad','categories'));
+    if (Gate::allows('update-ad', $ad)) {
+      $categories = Category::pluck('name', 'id');
+      return view('ads.edit', compact('ad','categories'));
+    }
+    return abort(403);
   }
   public function delete($id) {
     $ad = Ad::findOrFail($id);
