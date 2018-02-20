@@ -15,4 +15,9 @@ class CategoriesController extends Controller
     Category::create($request->all());
     return redirect()->back()->with('message', 'Category created.');
   }
+  public function update($id, Request $request) {
+    $category = Category::find($id);
+    $category->update($request->all());
+    return redirect()->back()->with('message', 'Category created.');
+  }
 }
