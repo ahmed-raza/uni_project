@@ -25,6 +25,7 @@ class CreateAdsTable extends Migration
             $table->boolean('contact_info')->default(0);
             $table->bigInteger('phone');
             $table->string('email');
+            $table->integer('price')->unsigned();
             $table->boolean('approve')->default(0);
             $table->timestamps();
 
