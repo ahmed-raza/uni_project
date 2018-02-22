@@ -15,4 +15,8 @@ class AdminController extends Controller
     $ads = Ad::all();
     return view('admin.dashboard', compact('categories', 'users', 'ads'));
   }
+  public function users() {
+    $users = User::all();
+    return view('admin.users.index', compact('users'));
+  }
 }
