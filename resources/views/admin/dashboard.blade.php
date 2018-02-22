@@ -30,7 +30,7 @@
             <li><a href="#">{{ $ad->title }}</a></li>
           @endforeach
         </ul>
-        <a href="#" class="btn btn-sm btn-success">View All</a>
+        <a href="{{ route('admin.ads') }}" class="btn btn-sm btn-success">View All</a>
       </div>
     </div>
     <div class="col-lg-4 users">
@@ -42,7 +42,7 @@
             <li><a href="#">{{ $user->name }}</a></li>
           @endforeach
         </ul>
-        <a href="#" class="btn btn-sm btn-success">View All</a>
+        <a href="{{ route('admin.users') }}" class="btn btn-sm btn-success">View All</a>
       </div>
     </div>
     <div class="col-lg-4 categories">
@@ -59,7 +59,6 @@
     </div>
   </div>
 </div>
-
 
 {!! Form::open(['url'=>route('category.store'), 'method'=>'POST']) !!}
   @include('admin.categories.partials._form', ['edit'=>false, 'title'=>'Add Category'])
