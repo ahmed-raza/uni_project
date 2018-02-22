@@ -8,6 +8,7 @@ use App\Http\Requests\AdsRequest;
 use App\Category;
 use App\Ad;
 use Auth;
+use File;
 
 class AdsController extends Controller
 {
@@ -15,7 +16,7 @@ class AdsController extends Controller
     $this->middleware('auth', ['except'=>['show', 'index']]);
   }
   public function index() {
-    $ads = Ad::latest('created_at')->approved()->get();
+    $ads = Ad::approved()->get();
     return view('ads.index', compact('ads'));
   }
   public function show($slug) {
@@ -27,22 +28,7 @@ class AdsController extends Controller
     return view('ads.create', compact('categories'));
   }
   public function store(AdsRequest $request) {
-    $slug = str_slug($request->input('title'), "-");
-    $images = "";
-    $phone = 0;
-    $email = "";
-    if (!$request->input('contact_info')) {
-      $phone = $request->input('phone');
-      $email = $request->input('email');
-    }
-    $request->request->add([
-      'slug'        => $slug,
-      'phone'       => $phone,
-      'email'       => $email,
-      'images'      => $images,
-      'category_id' => $request->input('category_id'),
-    ]);
-    $ad = Auth::user()->ads()->create($request->all());
+    $ad = $this->createOrUpdate($request);
     return redirect(route('ads.show', $ad->slug))->with('message','Your ad has been created, an admin will approve it after reviewing.');
   }
   public function edit($id) {
@@ -54,21 +40,7 @@ class AdsController extends Controller
     return abort(403);
   }
   public function update($id, AdsRequest $request) {
-    $ad = Ad::findOrFail($id);
-    $images = "";
-    $phone = 0;
-    $email = "";
-    if (!$request->input('contact_info')) {
-      $phone = $request->input('phone');
-      $email = $request->input('email');
-    }
-    $request->request->add([
-      'phone'       => $phone,
-      'email'       => $email,
-      'images'      => $images,
-      'category_id' => $request->input('category_id'),
-    ]);
-    $ad->update($request->all());
+    $ad = $this->createOrUpdate($request, true, $id);
     return redirect(route('admin.ads'))->with('message','Ad updated successfully.');
   }
   public function delete($id) {
@@ -79,5 +51,40 @@ class AdsController extends Controller
     $ad = Ad::findOrFail($id);
     $ad->delete();
     return redirect(route('user.ads'))->with('message', 'Ad deleted.');
+  }
+  private function createOrUpdate($request, $update = false, $id = null) {
+    $ad = $update ? Ad::findOrFail($id) : new Ad;
+    $ad->slug             = str_slug($request->input('title'), "-");
+    $ad->title            = $request->input('title');
+    $ad->user_id          = Auth::user()->id;
+    $ad->category_id      = $request->input('category_id');
+    $ad->price            = $request->input('price');
+    $ad->city             = $request->input('city');
+    $ad->pull_contact_info= $request->input('pull_contact_info');
+    $ad->description      = $request->input('description');
+    $ad->phone            = $request->input('contact_info') ? "" : $request->input('phone');
+    $ad->email            = $request->input('contact_info') ? "" : $request->input('email');
+    $ad->images           = $update ? implode(';', $request->input('image_names')) : "";
+    $ad->save();
+    if ($request->file('images')[0] !== null) {
+      $ad = Ad::findOrFail($ad->id);
+      $images = $request->file('images');
+      foreach ($images as $key => $image) {
+        $imageName = time() ."_($key)_". $image->getClientOriginalName();
+        $imagePath = public_path()."/files/ads/".$ad->id;
+        $image->move($imagePath, $imageName);
+        $ad->images .= "$imageName;";
+      }
+      $ad->save();
+    }
+    if ($update) {
+      $remove_images = $request->input('image_names');
+      foreach (glob(public_path()."/files/ads/".$ad->id."/*") as $image) {
+        if (!in_array(basename($image), $remove_images)) {
+          File::delete($image);
+        }
+      }
+    }
+    return $ad;
   }
 }
