@@ -53,6 +53,24 @@ class AdsController extends Controller
     }
     return abort(403);
   }
+  public function update($id, AdsRequest $request) {
+    $ad = Ad::findOrFail($id);
+    $images = "";
+    $phone = 0;
+    $email = "";
+    if (!$request->input('contact_info')) {
+      $phone = $request->input('phone');
+      $email = $request->input('email');
+    }
+    $request->request->add([
+      'phone'       => $phone,
+      'email'       => $email,
+      'images'      => $images,
+      'category_id' => $request->input('category_id'),
+    ]);
+    $ad->update($request->all());
+    return redirect(route('admin.ads'))->with('message','Ad updated successfully.');
+  }
   public function delete($id) {
     $ad = Ad::findOrFail($id);
     return view('partials.delete')->with(['entity_type'=>'ads', 'entity_id'=>$ad->id]);
