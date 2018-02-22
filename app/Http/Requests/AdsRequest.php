@@ -24,9 +24,9 @@ class AdsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
+            'title' => 'required|max:80',
             'category_id' => 'required',
-            'city' => 'required',
+            'city' => 'required|max:50',
             'description' => 'required',
             'phone'  => $this->input('pull_contact_info') ? '' : 'required',
             'email'  => $this->input('pull_contact_info') ? '' : 'required'
