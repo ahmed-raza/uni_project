@@ -35,8 +35,8 @@
   {!! Form::file('images', ['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('contact_info', 1, $edit ? $ad->contact_info : false, ['id'=>'contact_info']) !!}
-  {!! Form::label('contact_info', 'Pull my contact info from my profile.') !!}
+  {!! Form::checkbox('pull_contact_info', 1, $edit ? $ad->pull_contact_info : false, ['id'=>'pull_contact_info']) !!}
+  {!! Form::label('pull_contact_info', 'Pull my contact info from my profile.') !!}
 </div>
 <div class="form-group custom-contact-info">
   <div class="row">
@@ -50,14 +50,20 @@
     </div>
   </div>
 </div>
+@if (Auth::user()->role === 'admin')
+  <div class="form-group">
+    {!! Form::checkbox('approve', 1, $edit ? $ad->approve : false, ['id'=>'approve']) !!}
+    {!! Form::label('approve', 'Approve it.') !!}
+  </div>
+@endif
 <div class="form-group">
   {!! Form::submit('Post', ['class'=>'btn btn-block btn-primary']) !!}
 </div>
 <script type="text/javascript">
-  if($('input#contact_info').is(':checked')) {
+  if($('input#pull_contact_info').is(':checked')) {
     $('.custom-contact-info').hide();
   }
-  $('input#contact_info').change(function(){
+  $('input#pull_contact_info').change(function(){
     $('.custom-contact-info').show();
     if(this.checked) {
       $('.custom-contact-info').hide();

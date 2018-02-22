@@ -28,8 +28,8 @@ class AdsRequest extends FormRequest
             'category_id' => 'required',
             'city' => 'required',
             'description' => 'required',
-            'phone'  => $this->input('contact_info') ? '' : 'required',
-            'email'  => $this->input('contact_info') ? '' : 'required'
+            'phone'  => $this->input('pull_contact_info') ? '' : 'required',
+            'email'  => $this->input('pull_contact_info') ? '' : 'required'
         ];
     }
 }
