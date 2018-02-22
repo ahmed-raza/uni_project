@@ -27,7 +27,7 @@
         <a href="#" class="btn btn-primary btn-xs">Post Ad</a>
         <ul class="nav">
           @foreach ($ads as $ad)
-            <li><a href="#">{{ $ad->title }}</a></li>
+            <li>{{ Html::link(route('ads.show',$ad->slug), str_limit($ad->title, 20)) }}</li>
           @endforeach
         </ul>
         <a href="{{ route('admin.ads') }}" class="btn btn-sm btn-success">View All</a>
