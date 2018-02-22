@@ -16,7 +16,11 @@ class AdminController extends Controller
     return view('admin.dashboard', compact('categories', 'users', 'ads'));
   }
   public function users() {
-    $users = User::all();
+    $users = User::paginate(10);
     return view('admin.users.index', compact('users'));
+  }
+  public function ads() {
+    $ads = Ad::paginate(10);
+    return view('admin.ads.index', compact('ads'));
   }
 }
