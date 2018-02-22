@@ -6,22 +6,21 @@
     <h1>Ads</h1>
     <div class="row">
       <div class="col-lg-9">
-        @if($ads == null)
-          @foreach($ads as $ad)
-          <div class="row ads">
-            <div class="col-lg-3">
-              <img src="dining.jpg" alt="#" height="140" width="200">
-            </div>
-            <div class="col-lg-9">
-              <h3>{{ Html::link(route('ads.show',$ad->slug), $ad->title) }}</h3>
-              <em>18 December 2017</em>
-              {!! str_limit($ad->description, 200) !!}
-            </div>
-          </div>
-          @endforeach
-        @else
+        @unless ($ads)
           <p>No ads found.</p>
-        @endif
+        @endunless
+        @foreach($ads as $ad)
+        <div class="row ads">
+          <div class="col-lg-3">
+            <img src="dining.jpg" alt="#" height="140" width="200">
+          </div>
+          <div class="col-lg-9">
+            <h3>{{ Html::link(route('ads.show',$ad->slug), $ad->title) }}</h3>
+            <em>{{ $ad->created_at->diffForHumans() }}</em>
+            {!! str_limit($ad->description, 200) !!}
+          </div>
+        </div>
+        @endforeach
       </div>
       <div class="col-lg-3">
         <fieldset>
