@@ -20,6 +20,8 @@ Route::get('ads/{id}/delete', 'AdsController@delete')->name('ads.delete');
 Route::group(['prefix'=>'admin', 'middleware'=>['admin']], function(){
   Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
   Route::resource('category', 'CategoriesController');
+  Route::get('users', 'AdminController@users')->name('admin.users');
+  Route::get('ads', 'AdminController@index')->name('admin.users');
 });
 
 Auth::routes();
