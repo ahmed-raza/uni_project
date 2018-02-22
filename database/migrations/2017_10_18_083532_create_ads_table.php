@@ -23,8 +23,8 @@ class CreateAdsTable extends Migration
             $table->text('images');
             $table->text('description');
             $table->boolean('pull_contact_info')->default(0);
-            $table->string('phone')->length(100);
-            $table->string('email');
+            $table->string('phone')->length(30)->nullable();
+            $table->string('email')->length(100)->nullable();
             $table->integer('price')->unsigned();
             $table->boolean('approve')->default(0);
             $table->timestamps();
