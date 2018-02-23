@@ -10,9 +10,9 @@ use App\Ad;
 class AdminController extends Controller
 {
   public function dashboard() {
-    $categories = Category::all();
-    $users = User::all();
-    $ads = Ad::all();
+    $categories = Category::orderBy('created_at', 'desc')->limit(5)->get();
+    $users = User::orderBy('created_at', 'desc')->limit(5)->get();
+    $ads = Ad::orderBy('created_at', 'desc')->limit(5)->get();
     return view('admin.dashboard', compact('categories', 'users', 'ads'));
   }
   public function users() {
