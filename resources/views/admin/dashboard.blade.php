@@ -24,7 +24,7 @@
     <div class="col-lg-4 ads">
       <div class="well">
         <h3>Ads</h3>
-        <a href="#" class="btn btn-primary btn-xs">Post Ad</a>
+        <a href="{{ route('ads.create') }}" class="btn btn-primary btn-xs">Post Ad</a>
         <ul class="nav">
           @foreach ($ads as $ad)
             <li>{{ Html::link(route('ads.show',$ad->slug), str_limit($ad->title, 20)) }}</li>
@@ -54,13 +54,13 @@
           <li><a href="#">{{ $category->name }}</a></li>
           @endforeach
         </ul>
-        <a href="{{ route('category.index') }}" class="btn btn-sm btn-success">View All</a>
+        <a href="{{ route('categories.index') }}" class="btn btn-sm btn-success">View All</a>
       </div>
     </div>
   </div>
 </div>
 
-{!! Form::open(['url'=>route('category.store'), 'method'=>'POST']) !!}
+{!! Form::open(['url'=>route('categories.store'), 'method'=>'POST']) !!}
   @include('admin.categories.partials._form', ['edit'=>false, 'title'=>'Add Category'])
 {!! Form::close() !!}
 

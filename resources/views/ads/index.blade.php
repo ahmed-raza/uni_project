@@ -6,9 +6,9 @@
     <h1>Ads</h1>
     <div class="row">
       <div class="col-lg-9">
-        @unless ($ads)
+        @if ($ads->isEmpty())
           <p>No ads found.</p>
-        @endunless
+        @endif
         @foreach($ads as $ad)
         <div class="row ads">
           <div class="col-lg-3">
