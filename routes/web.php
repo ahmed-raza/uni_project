@@ -16,10 +16,11 @@ Route::get('my-ads', 'UsersController@ads')->name('user.ads');
 Route::get('user/profile', 'UsersController@profile')->name('user.profile');
 Route::resource('ads', 'AdsController');
 Route::get('ads/{id}/delete', 'AdsController@delete')->name('ads.delete');
+Route::resource('categories', 'CategoriesController');
+Route::get('categories/{id}/delete', 'CategoriesController@delete')->name('categories.delete');
 
 Route::group(['prefix'=>'admin', 'middleware'=>['admin']], function(){
   Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
-  Route::resource('category', 'CategoriesController');
   Route::get('users', 'AdminController@users')->name('admin.users');
   Route::get('ads', 'AdminController@ads')->name('admin.ads');
 });
