@@ -14,6 +14,10 @@ class CategoriesController extends Controller
     $categories = Category::paginate(10);
     return view('admin.categories.index', compact('categories'));
   }
+  public function show($id) {
+    $category = Category::findOrFail($id);
+    return view('categories.show', compact('category'));
+  }
   public function store(Request $request) {
     Category::create($request->all());
     return redirect()->back()->with('message', 'Category created.');
