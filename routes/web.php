@@ -12,12 +12,14 @@
 */
 
 Route::get('/', 'PagesController@home')->name('home');
-Route::get('my-ads', 'UsersController@ads')->name('user.ads');
 Route::get('user/profile', 'UsersController@profile')->name('user.profile');
 Route::resource('ads', 'AdsController');
 Route::get('ads/{id}/delete', 'AdsController@delete')->name('ads.delete');
 Route::resource('categories', 'CategoriesController');
 Route::get('categories/{id}/delete', 'CategoriesController@delete')->name('categories.delete');
+Route::get('user/{id}/edit', 'UsersController@edit')->name('user.edit');
+Route::get('user/{id}/ads', 'UsersController@ads')->name('user.ads');
+Route::patch('user/{id}', 'UsersController@update')->name('user.update');
 
 Route::group(['prefix'=>'admin', 'middleware'=>['admin']], function(){
   Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
