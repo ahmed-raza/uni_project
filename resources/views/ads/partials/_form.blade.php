@@ -42,11 +42,14 @@
     <div class="row">
     @foreach (array_filter(explode(';', $ad->images), 'strlen') as $image)
       <div class="col-lg-4">
-        <a href="/files/ads/{{ $ad->id }}/{{ $image }}" target="_blank">
-          <img src="/files/ads/{{ $ad->id }}/{{ $image }}" alt="{{ $image }}" height="100" width="100">
-        </a><br>
-        <a href="javascript:void(0)" id="remove-image" class="text-center">Remove</a>
-        {!! Form::hidden('image_names[]', $image) !!}
+        <div class="uploaded-image">
+          <a href="/files/ads/{{ $ad->id }}/{{ $image }}" target="_blank">
+            <img src="/files/ads/{{ $ad->id }}/{{ $image }}" alt="{{ $image }}" height="100" width="100">
+          </a><br>
+          <a href="javascript:void(0)" id="remove-image" class="text-center" data-image-name="{{ $image }}">Remove</a>
+          {!! Form::hidden('keep_images[]', $image) !!}
+        </div>
+        {!! Form::hidden('removed_images[]', null, ['id'=>'removed-images']) !!}
       </div>
     @endforeach
     </div>
@@ -90,8 +93,8 @@
   });
   $('a#remove-image').each(function() {
     $(this).click(function(e) {
-      $(this).attr('data-image-name');
-      $(this).parents('.col-lg-4').remove();
+      $(this).parents('.col-lg-4').find('input#removed-images').val($(this).attr('data-image-name'));
+      $(this).parents('.col-lg-4').find('.uploaded-image').remove();
     });
   });
 </script>
