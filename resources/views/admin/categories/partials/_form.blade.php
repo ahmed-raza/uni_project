@@ -1,4 +1,4 @@
-<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
+<div class="modal fade" id="{{ $edit ? 'categoryEditModal' : 'categoryModal' }}" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,7 +8,7 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="recipient-name" class="control-label">Name:</label>
-          <input type="text" class="form-control" id="category-name" name="name" value="{{ $edit ? $cattegory->name : '' }}" required=true>
+          <input type="text" class="form-control" id="category-name" name="name" required=true>
         </div>
       </div>
       <div class="modal-footer">
