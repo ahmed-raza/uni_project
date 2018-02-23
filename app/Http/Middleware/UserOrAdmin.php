@@ -19,9 +19,17 @@ class UserOrAdmin
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            $ad = Ad::findOrFail($request->segments()[1]);
-            if (Auth::user()->role === 'admin' || Auth::user()->id === $ad->user_id) {
-                return $next($request);
+            if ($request->segments()[0] === 'user') {
+                $user = User::findOrFail($request->segments()[1]);
+                if (Auth::user()->role === 'admin' || Auth::user()->id === $user->id) {
+                    return $next($request);
+                }
+            }
+            if ($request->segments()[0] === 'ads') {
+                $ad = Ad::findOrFail($request->segments()[1]);
+                if (Auth::user()->role === 'admin' || Auth::user()->id === $ad->user_id) {
+                    return $next($request);
+                }
             }
         }
         return abort(403, 'Unauthorized Access');
