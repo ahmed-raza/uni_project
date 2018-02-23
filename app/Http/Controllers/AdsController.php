@@ -15,6 +15,7 @@ class AdsController extends Controller
 {
   public function __construct() {
     $this->middleware('auth', ['except'=>['show', 'index']]);
+    $this->middleware('userOrAdmin', ['only'=>['edit', 'delete']]);
   }
   public function index() {
     $ads = Ad::approved()->get();
@@ -48,7 +49,7 @@ class AdsController extends Controller
       return redirect()->back()->withInput($request->all())->withErrors('Maximum allowed number of images are 3.');
     }
     $ad = $this->createOrUpdate($request, true, $id);
-    return redirect(route('admin.ads'))->with('message','Ad updated successfully.');
+    return redirect(url()->previous())->with('message','Ad updated successfully.');
   }
   public function delete($id) {
     $ad = Ad::findOrFail($id);
@@ -57,7 +58,7 @@ class AdsController extends Controller
   public function destroy($id) {
     $ad = Ad::findOrFail($id);
     $ad->delete();
-    return redirect(route('user.ads'))->with('message', 'Ad deleted.');
+    return redirect(route('ads.index'))->with('message', 'Ad deleted.');
   }
   private function createOrUpdate($request, $update = false, $id = null) {
     $ad                   = $update ? Ad::findOrFail($id) : new Ad;
@@ -72,6 +73,7 @@ class AdsController extends Controller
     $ad->phone            = $request->input('pull_contact_info') ? "" : $request->input('phone');
     $ad->email            = $request->input('pull_contact_info') ? "" : $request->input('email');
     $ad->images           = $update ? implode(';', $request->input('keep_images') ? $request->input('keep_images') : []) : '';
+    $ad->approve          = $request->input('approve') ? 1 : 0;
     $ad->save();
     if ($request->file('images')[0] !== null) {
       $ad = Ad::findOrFail($ad->id);
