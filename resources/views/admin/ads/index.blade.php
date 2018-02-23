@@ -25,7 +25,9 @@
             <td>{{ $ad->category->name }}</td>
             <td>{{ $ad->approve ? 'Yes' : 'No' }}</td>
             <td>{{ $ad->created_at }}</td>
-            <td>{{ Html::link(route('ads.edit', $ad->id), 'Edit') }} | <a href="#">Delete</a></td>
+            <td>
+              {{ Html::link(route('ads.edit', $ad->id), 'Edit') }} | {!! Html::link(route('ads.delete', $ad->id), 'Delete') !!}
+            </td>
           </tr>
         @endforeach
       </tbody>
