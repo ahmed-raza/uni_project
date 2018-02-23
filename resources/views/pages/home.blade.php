@@ -9,26 +9,15 @@
         <fieldset>
           <legend>Categories</legend>
           <div class="row">
-            <div class="col-lg-6">
-              <ul class="nav">
-                <li><a href="#">Real Estate</a></li>
-                <li><a href="#">Furniture</a></li>
-                <li><a href="#">Cars</a></li>
-                <li><a href="#">Motorbikes</a></li>
-                <li><a href="#">Home Appliances</a></li>
-                <li><a href="#">Electronics</a></li>
-              </ul>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav">
-                <li><a href="#">Laptops</a></li>
-                <li><a href="#">Computers</a></li>
-                <li><a href="#">Gaming</a></li>
-                <li><a href="#">Tutors</a></li>
-                <li><a href="#">Pets</a></li>
-                <li><a href="#">Books</a></li>
-              </ul>
-            </div>
+            @foreach ($categories->chunk(2) as $items)
+              <div class="col-lg-6">
+                <ul class="nav">
+                  @foreach ($items as $category)
+                    <li><a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a></li>
+                  @endforeach
+                </ul>
+              </div>
+            @endforeach
           </div>
         </fieldset>
       </div>
