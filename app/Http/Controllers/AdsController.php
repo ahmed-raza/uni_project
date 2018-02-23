@@ -9,6 +9,7 @@ use App\Category;
 use App\Ad;
 use Auth;
 use File;
+use Validator;
 
 class AdsController extends Controller
 {
@@ -28,6 +29,9 @@ class AdsController extends Controller
     return view('ads.create', compact('categories'));
   }
   public function store(AdsRequest $request) {
+    if (count($request->file('images')) > 3) {
+      return redirect()->back()->withInput($request->all())->withErrors('Maximum allowed number of images are 3.');
+    }
     $ad = $this->createOrUpdate($request);
     return redirect(route('ads.show', $ad->slug))->with('message','Your ad has been created, an admin will approve it after reviewing.');
   }
@@ -40,6 +44,9 @@ class AdsController extends Controller
     return abort(403);
   }
   public function update($id, AdsRequest $request) {
+    if (count($request->file('images')) > 3) {
+      return redirect()->back()->withInput($request->all())->withErrors('Maximum allowed number of images are 3.');
+    }
     $ad = $this->createOrUpdate($request, true, $id);
     return redirect(route('admin.ads'))->with('message','Ad updated successfully.');
   }
@@ -53,7 +60,7 @@ class AdsController extends Controller
     return redirect(route('user.ads'))->with('message', 'Ad deleted.');
   }
   private function createOrUpdate($request, $update = false, $id = null) {
-    $ad = $update ? Ad::findOrFail($id) : new Ad;
+    $ad                   = $update ? Ad::findOrFail($id) : new Ad;
     $ad->slug             = str_slug($request->input('title'), "-");
     $ad->title            = $request->input('title');
     $ad->user_id          = Auth::user()->id;
@@ -62,9 +69,9 @@ class AdsController extends Controller
     $ad->city             = $request->input('city');
     $ad->pull_contact_info= $request->input('pull_contact_info');
     $ad->description      = $request->input('description');
-    $ad->phone            = $request->input('contact_info') ? "" : $request->input('phone');
-    $ad->email            = $request->input('contact_info') ? "" : $request->input('email');
-    $ad->images           = $update ? implode(';', $request->input('image_names')) : "";
+    $ad->phone            = $request->input('pull_contact_info') ? "" : $request->input('phone');
+    $ad->email            = $request->input('pull_contact_info') ? "" : $request->input('email');
+    $ad->images           = $update ? implode(';', $request->input('keep_images') ? $request->input('keep_images') : []) : '';
     $ad->save();
     if ($request->file('images')[0] !== null) {
       $ad = Ad::findOrFail($ad->id);
@@ -78,10 +85,11 @@ class AdsController extends Controller
       $ad->save();
     }
     if ($update) {
-      $remove_images = $request->input('image_names');
-      foreach (glob(public_path()."/files/ads/".$ad->id."/*") as $image) {
-        if (!in_array(basename($image), $remove_images)) {
-          File::delete($image);
+      $remove_images = $request->input('removed_images');
+      if ($remove_images) {
+        foreach ($remove_images as $remove_image) {
+          $path = public_path().'/files/ads/'.$ad->id.'/'.$remove_image;
+          File::delete($path);
         }
       }
     }
