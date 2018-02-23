@@ -11,7 +11,7 @@ class CategoriesController extends Controller
     $this->middleware('admin', ['except'=>['show']]);
   }
   public function index() {
-    $categories = Category::all();
+    $categories = Category::paginate(10);
     return view('admin.categories.index', compact('categories'));
   }
   public function store(Request $request) {
@@ -19,9 +19,9 @@ class CategoriesController extends Controller
     return redirect()->back()->with('message', 'Category created.');
   }
   public function update($id, Request $request) {
-    $category = Category::find($id);
+    $category = Category::findOrFail($id);
     $category->update($request->all());
-    return redirect()->back()->with('message', 'Category created.');
+    return redirect()->back()->with('message', 'Category updated.');
   }
   public function delete($id) {
     $category = Category::findOrFail($id);
