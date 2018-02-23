@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Ad;
 
 class CategoriesController extends Controller
 {
@@ -16,7 +17,8 @@ class CategoriesController extends Controller
   }
   public function show($id) {
     $category = Category::findOrFail($id);
-    return view('categories.show', compact('category'));
+    $ads = Ad::where('category_id', $category->id)->approved()->get();
+    return view('categories.show', compact('category', 'ads'));
   }
   public function store(Request $request) {
     Category::create($request->all());

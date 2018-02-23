@@ -4,10 +4,10 @@
 
 	<div class="container">
 		<h1>{{ $category->name }}</h1>
-    @if ($category->ads->isEmpty())
+    @if ($ads->isEmpty())
       <p>No ads found.</p>
     @endif
-    @foreach($category->ads as $ad)
+    @foreach($ads as $ad)
     <div class="row ads">
     	@if ($ad->images)
 	      <div class="col-lg-3">
