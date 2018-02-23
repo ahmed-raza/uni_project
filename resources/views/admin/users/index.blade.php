@@ -23,7 +23,7 @@
             <td>{{ $user->email }}</td>
             <td>{{ $user->role }}</td>
             <td>{{ count($user->ads) }}</td>
-            <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+            <td>{!! Html::link(route('user.edit', $user->id), 'Edit') !!}</td>
           </tr>
         @endforeach
       </tbody>
