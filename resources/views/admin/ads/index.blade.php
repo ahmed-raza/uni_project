@@ -22,7 +22,7 @@
             <td>{{ $ad->id }}</td>
             <td>{{ Html::link(route('ads.show',$ad->slug), str_limit($ad->title, 20)) }}</td>
             <td>{{ $ad->user->name }}</td>
-            <td>{{ $ad->category->name }}</td>
+            <td>{{ Html::link(route('categories.show', $ad->category->id), $ad->category->name ) }}</td>
             <td>{{ $ad->approve ? 'Yes' : 'No' }}</td>
             <td>{{ $ad->created_at }}</td>
             <td>
