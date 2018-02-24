@@ -30,4 +30,15 @@ class Ad extends Model
   public function scopeApproved($query){
     $query->where('approve', 1);
   }
+  public function scopeGetCities() {
+    $cities = [
+      'Lahore'      => 'Lahore',
+      'Islamabad'   => 'Islamabad',
+      'Karachi'     => 'Karachi',
+      'Multan'      => 'Multan',
+      'Faisalabad'  => 'Faisalabad',
+      'Sheikhupura' => 'Sheikhupura',
+    ];
+    return $cities;
+  }
 }
