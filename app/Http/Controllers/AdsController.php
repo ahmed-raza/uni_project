@@ -27,7 +27,8 @@ class AdsController extends Controller
   }
   public function create() {
     $categories = Category::pluck('name', 'id');
-    return view('ads.create', compact('categories'));
+    $cities = Ad::getCities();
+    return view('ads.create', compact('categories', 'cities'));
   }
   public function store(AdsRequest $request) {
     if (count($request->file('images')) > 3) {
@@ -40,7 +41,8 @@ class AdsController extends Controller
     $ad = Ad::findOrFail($id);
     if (Gate::allows('update-ad', $ad)) {
       $categories = Category::pluck('name', 'id');
-      return view('ads.edit', compact('ad','categories'));
+      $cities = Ad::getCities();
+      return view('ads.edit', compact('ad','categories', 'cities'));
     }
     return abort(403);
   }
