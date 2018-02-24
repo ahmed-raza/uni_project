@@ -17,9 +17,14 @@ class AdsController extends Controller
     $this->middleware('auth', ['except'=>['show', 'index']]);
     $this->middleware('userOrAdmin', ['only'=>['edit', 'delete']]);
   }
-  public function index() {
-    $ads = Ad::approved()->get();
-    return view('ads.index', compact('ads'));
+  public function index(Request $request) {
+    if ($request->ajax()) {
+      return $this->search($request);
+    }
+    $ads = Ad::approved()->paginate(5);
+    $cities = Ad::getCities();
+    $categories = Category::pluck('name', 'id');
+    return view('ads.index', compact('ads', 'cities', 'categories'));
   }
   public function show($slug) {
     $ad = Ad::where('slug', $slug)->first();
@@ -70,7 +75,7 @@ class AdsController extends Controller
     $ad->category_id      = $request->input('category_id');
     $ad->price            = $request->input('price');
     $ad->city             = $request->input('city');
-    $ad->pull_contact_info= $request->input('pull_contact_info');
+    $ad->pull_contact_info= $request->input('pull_contact_info') ? $request->input('pull_contact_info') : 0;
     $ad->description      = $request->input('description');
     $ad->phone            = $request->input('pull_contact_info') ? "" : $request->input('phone');
     $ad->email            = $request->input('pull_contact_info') ? "" : $request->input('email');
@@ -98,5 +103,32 @@ class AdsController extends Controller
       }
     }
     return $ad;
+  }
+  private function search($request) {
+    $title = $request->get('title');
+    $category_id = (int)$request->get('category_id');
+    $min_price = $request->get('min-price');
+    $max_price = $request->get('max-price');
+    $city = $request->get('city');
+    $ads = Ad::where('title', 'like', "%$title%");
+    if (isset($category_id)) {
+      $ads->where('category_id', $category_id);
+    }
+    if (isset($city)) {
+      $ads->where('city', $city);
+    }
+    if (isset($min_price) && isset($max_price)) {
+      $ads->whereBetween('price', [$min_price, $max_price]);
+    }
+    if (!empty($ads)) {
+        $ads = $ads->approved()->paginate(5)->appends([
+            'title' => $title,
+            'category_id' => $category_id,
+            'city' => $city,
+            ]);
+        return view('ads.partials.results', compact('ads', 'request'))->render();
+    } else {
+        return false;
+    }
   }
 }
