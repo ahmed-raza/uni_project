@@ -10,11 +10,13 @@
           <p>No ads found.</p>
         @endif
         @foreach($ads as $ad)
-        <div class="row ads">
-          <div class="col-lg-3">
-            <img src="dining.jpg" alt="#" height="140" width="200">
-          </div>
-          <div class="col-lg-9">
+        <div class="row ads__row">
+          @if ($ad->images)
+            <div class="col-lg-3">
+              <img src="/files/ads/{{ $ad->id }}/{{ explode(';', $ad->images)[0] }}" alt="#" height="140" width="200">
+            </div>
+          @endif
+          <div class="{{ $ad->images ? 'col-lg-9' : 'col-lg-12' }}">
             <h3>{{ Html::link(route('ads.show',$ad->slug), $ad->title) }}</h3>
             <em>{{ $ad->created_at->diffForHumans() }}</em>
             {!! str_limit($ad->description, 200) !!}

@@ -22,7 +22,7 @@
   <div class="col-lg-6">
     <div class="form-group">
       {!! Form::label('city') !!}
-      {!! Form::text('city', null, ['class'=>'form-control']) !!}
+      {!! Form::select('city', $cities, $edit ? $ad->city : null, ['class'=>'form-control']) !!}
     </div>
   </div>
 </div>
