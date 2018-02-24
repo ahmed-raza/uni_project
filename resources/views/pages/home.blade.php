@@ -9,8 +9,8 @@
         <fieldset>
           <legend>Categories</legend>
           <div class="row">
-            @foreach ($categories->chunk(2) as $items)
-              <div class="col-lg-6">
+            @foreach ($categories->chunk(3) as $items)
+              <div class="col-lg-4">
                 <ul class="nav">
                   @foreach ($items as $category)
                     <li><a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a></li>
