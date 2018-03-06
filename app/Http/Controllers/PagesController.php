@@ -11,6 +11,8 @@ class PagesController extends Controller
 {
   public function home() {
   	$categories = Category::all();
-    return view('pages.home', compact('categories'));
+  	$categories_for_search = Category::pluck('name', 'id');
+  	$cities = Ad::getCities();
+    return view('pages.home', compact('categories', 'cities', 'categories_for_search'));
   }
 }

@@ -13,7 +13,7 @@
       </div>
       <div class="col-lg-6">
         {!! Form::label('Category') !!}
-        {!! Form::select('category_id', $categories, null, ['class'=>'form-control', 'id'=>'category_id']) !!}
+        {!! Form::select('category_id', $categories_for_search, null, ['class'=>'form-control', 'id'=>'category_id']) !!}
       </div>
     </div>            
     <div class="row">
@@ -58,6 +58,7 @@
       },
       success: function(data){
         $('.ads').html(data);
+        $('input#price-min').append(price_min);
       }
     });
   });

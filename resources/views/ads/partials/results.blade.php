@@ -22,8 +22,6 @@
   $(function() {
     $('.pagination a').click(function(e) {
         e.preventDefault();
-        $('#load a').css('color', '#dfecf6');
-        $('#load').append('<img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="images/throbber.gif" />');
         var url = $(this).attr('href');
         getAds(url);
         window.history.pushState("", "", url);

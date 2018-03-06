@@ -23,8 +23,8 @@ class AdsController extends Controller
     }
     $ads = Ad::approved()->paginate(5);
     $cities = Ad::getCities();
-    $categories = Category::pluck('name', 'id');
-    return view('ads.index', compact('ads', 'cities', 'categories'));
+    $categories_for_search = Category::pluck('name', 'id');
+    return view('ads.index', compact('ads', 'cities', 'categories_for_search'));
   }
   public function show($slug) {
     $ad = Ad::where('slug', $slug)->first();
@@ -111,10 +111,10 @@ class AdsController extends Controller
     $max_price = $request->get('max-price');
     $city = $request->get('city');
     $ads = Ad::where('title', 'like', "%$title%");
-    if (isset($category_id)) {
+    if (isset($category_id) && !empty($category_id)) {
       $ads->where('category_id', $category_id);
     }
-    if (isset($city)) {
+    if (isset($city) && !empty($city)) {
       $ads->where('city', $city);
     }
     if (isset($min_price) && isset($max_price)) {

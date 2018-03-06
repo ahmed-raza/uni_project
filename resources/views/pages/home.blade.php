@@ -22,54 +22,10 @@
         </fieldset>
       </div>
       <div class="col-lg-6">
-        <fieldset>
-          <legend>Search</legend>
-          <form action="#">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label for="title">Title</label>
-                  <input type="text" placeholder="Title" class="form-control">
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label for="title">Category</label>
-                  <select name="category" id="category" class="form-control">
-                    <option value="_none">Category</option>
-                    <option value="Real Estate">Real Estate</option>
-                    <option value="Vehicles">Vehicles</option>
-                    <option value="Books">Books</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">            
-              <div class="row">
-                <div class="col-lg-6">
-                  <label for="price-min">Price min: <span id="price-min"></span></label>
-                  <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
-                </div>
-                <div class="col-lg-6">
-                  <label for="price-max">Price max: <span id="price-max"></span></label>
-                  <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="city">City</label>
-              <select name="city" id="city" class="form-control">
-                <option value="_none">Select City</option>
-                <option value="lahore">Lahore</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-block" value="Search">
-            </div>
-          </form>
-        </fieldset>
+        @include('ads.partials.search')
       </div>
     </div>
+    <div class="ads"></div>
     <h2>Featured Ads</h2>
     <div class="flexslider">
       <ul class="slides">

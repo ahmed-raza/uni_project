@@ -24,6 +24,7 @@
             </div>
           </div>
           @endforeach
+          {{ $ads->links() }}
         </div>
       </div>
       <div class="col-lg-4">
