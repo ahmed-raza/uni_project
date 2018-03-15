@@ -6,10 +6,10 @@
     <h1>Ads</h1>
     <div class="row">
       <div class="col-lg-8">
-        @if ($ads->isEmpty())
-          <p>No ads found.</p>
-        @endif
-        <div class="ads">        
+        <div class="ads">
+          @if ($ads->isEmpty())
+            <p>No ads found.</p>
+          @endif
           @foreach($ads as $ad)
           <div class="row ads__row">
             @if ($ad->images)

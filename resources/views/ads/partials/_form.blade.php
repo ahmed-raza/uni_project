@@ -77,6 +77,10 @@
     {!! Form::checkbox('approve', 1, $edit ? $ad->approve : false, ['id'=>'approve']) !!}
     {!! Form::label('approve', 'Approve it.') !!}
   </div>
+  <div class="form-group">
+    {!! Form::checkbox('featured', 1, $edit ? $ad->featured : false, ['id'=>'featured']) !!}
+    {!! Form::label('featured', 'Featured Ad.') !!}
+  </div>
 @endif
 <div class="form-group">
   {!! Form::submit('Post', ['class'=>'btn btn-block btn-primary']) !!}

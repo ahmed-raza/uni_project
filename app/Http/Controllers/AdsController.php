@@ -81,6 +81,7 @@ class AdsController extends Controller
     $ad->email            = $request->input('pull_contact_info') ? "" : $request->input('email');
     $ad->images           = $update ? implode(';', $request->input('keep_images') ? $request->input('keep_images') : []) : '';
     $ad->approve          = $request->input('approve') ? 1 : 0;
+    $ad->featured         = $request->input('featured') ? 1 : 0;
     $ad->save();
     if ($request->file('images')[0] !== null) {
       $ad = Ad::findOrFail($ad->id);

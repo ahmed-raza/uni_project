@@ -27,6 +27,7 @@ class CreateAdsTable extends Migration
             $table->string('email')->length(100)->nullable();
             $table->integer('price')->unsigned();
             $table->boolean('approve')->default(0);
+            $table->boolean('featured')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')

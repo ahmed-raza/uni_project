@@ -16,6 +16,12 @@ class AdsRequest extends FormRequest
         return true;
     }
 
+    public function messages() {
+        return [
+            'images.required' => 'Images are required for a featured ad.',
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -29,7 +35,8 @@ class AdsRequest extends FormRequest
         'city'        => 'required|max:50',
         'description' => 'required',
         'phone'       => $this->input('pull_contact_info') ? '' : 'required',
-        'email'       => $this->input('pull_contact_info') ? '' : 'required'
+        'email'       => $this->input('pull_contact_info') ? '' : 'required',
+        'images'      => $this->input('featured') ? 'required' : '',
       ];
     }
 }

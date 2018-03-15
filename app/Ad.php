@@ -15,6 +15,7 @@ class Ad extends Model
     'images',
     'description',
     'approve',
+    'featured',
     'pull_contact_info',
     'email',
     'phone',
