@@ -42,4 +42,7 @@ class Ad extends Model
     ];
     return $cities;
   }
+  public function scopeGetFeatured($query){
+    $query->where('approve', 1)->where('featured', 1);
+  }
 }
