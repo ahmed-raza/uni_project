@@ -36,7 +36,7 @@ class AdsRequest extends FormRequest
         'description' => 'required',
         'phone'       => $this->input('pull_contact_info') ? '' : 'required',
         'email'       => $this->input('pull_contact_info') ? '' : 'required',
-        'images'      => $this->input('featured') ? 'required' : '',
+        'images'      => $this->input('featured') && $this->method() !== 'PATCH' ? 'required' : '',
       ];
     }
 }
