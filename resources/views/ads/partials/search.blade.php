@@ -13,7 +13,10 @@
       </div>
       <div class="col-lg-6">
         {!! Form::label('Category') !!}
-        {!! Form::select('category_id', $categories_for_search, null, ['class'=>'form-control', 'id'=>'category_id']) !!}
+        {!! Form::select('category_id',
+          ['' => '- Select -'] + $categories_for_search,
+          null,
+          ['class'=>'form-control', 'id'=>'category_id']) !!}
       </div>
     </div>            
     <div class="row">
@@ -38,6 +41,8 @@
 <script type="text/javascript">
   $('#ads-search').submit(function(e){
     e.preventDefault();
+    $('#loader').show();
+    $('.ads').addClass('overlay');
     var action = $(this).attr('action');
     var title = $(this).find('#title').val();
     var category_id = $(this).find('#category_id').val();
@@ -57,8 +62,12 @@
         price_max : price_max,
       },
       success: function(data){
-        $('.ads').html(data);
-        $('input#price-min').append(price_min);
+        setTimeout(function(){
+          $('.ads').html(data);
+          $('input#price-min').append(price_min);
+          $('#loader').hide();
+          $('.ads').removeClass('overlay');
+        }, 2000);
       }
     });
   });

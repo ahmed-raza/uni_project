@@ -6,6 +6,7 @@
     <h1>Ads</h1>
     <div class="row">
       <div class="col-lg-8">
+        <div id="loader"></div>
         <div class="ads">
           @if ($ads->isEmpty())
             <p>No ads found.</p>
