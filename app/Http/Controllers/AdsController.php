@@ -23,7 +23,7 @@ class AdsController extends Controller
     }
     $ads = Ad::approved()->paginate(5);
     $cities = Ad::getCities();
-    $categories_for_search = Category::pluck('name', 'id');
+    $categories_for_search = Category::pluck('name', 'id')->all();
     return view('ads.index', compact('ads', 'cities', 'categories_for_search'));
   }
   public function show($slug) {
