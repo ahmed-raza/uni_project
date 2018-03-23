@@ -14,7 +14,7 @@
   display: none;
   height: 100px;
   width: 100px;
-  background: url('../images/loading3.gif');
+  background: url('../images/loader.gif');
   position: absolute;
   z-index: 999;
   left: 40%;
