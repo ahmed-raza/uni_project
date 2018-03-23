@@ -32,7 +32,7 @@
 </div>
 <div class="row">
   <div class="{{ $edit ? 'col-lg-6' : 'col-lg-12' }}">
-    <div class="{{ $edit ? '' : 'form-group' }}">
+    <div class="{{ $edit && $ad->images !== '' ? '' : 'form-group' }}">
       {!! Form::label('images') !!}
       {!! Form::file('images[]', ['class'=>'form-control', 'multiple'=>true]) !!}
     </div>
