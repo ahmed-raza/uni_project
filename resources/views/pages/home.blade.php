@@ -56,7 +56,7 @@
                 @endif
                 <h3>{!! Html::link(route('ads.show', $ad->slug), $ad->title) !!}</h3>
                 <em>{{ $ad->created_at->format('d F Y h:i a') }}</em>
-                {!! str_limit($ad->description, 200) !!}
+                {!! str_limit($ad->description, $ad->images ? 200 : 550) !!}
                 {!! Html::link(route('ads.show', $ad->slug),'See details') !!}
               </div>
             </div>
