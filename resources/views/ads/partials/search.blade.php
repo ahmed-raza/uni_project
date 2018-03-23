@@ -31,7 +31,7 @@
     </div>
     <div class="form-group">
       <label for="city">City</label>
-      {!! Form::select('city', $cities, null, ['class'=>'form-control', 'id'=>'city']) !!}
+      {!! Form::select('city', [''=>'- Select -']+$cities, null, ['class'=>'form-control', 'id'=>'city']) !!}
     </div>
     <div class="form-group">
       {!! Form::submit('Search', ['class'=>'btn btn-block btn-success']) !!}
