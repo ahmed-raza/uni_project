@@ -11,7 +11,7 @@ class PagesController extends Controller
 {
   public function home() {
   	$categories = Category::all();
-  	$categories_for_search = Category::pluck('name', 'id');
+    $categories_for_search = Category::pluck('name', 'id')->all();
   	$cities = Ad::getCities();
     $latest_ads = Ad::orderBy('created_at', 'desc')->limit(5)->get();
     $featured_ads = Ad::getFeatured()->get();
