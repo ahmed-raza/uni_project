@@ -13,7 +13,7 @@ class PagesController extends Controller
   	$categories = Category::all();
     $categories_for_search = Category::pluck('name', 'id')->all();
   	$cities = Ad::getCities();
-    $latest_ads = Ad::orderBy('created_at', 'desc')->limit(5)->get();
+    $latest_ads = Ad::approved()->orderBy('created_at', 'desc')->limit(5)->get();
     $featured_ads = Ad::getFeatured()->get();
     return view('pages.home', compact('categories', 'cities', 'categories_for_search', 'latest_ads', 'featured_ads'));
   }
