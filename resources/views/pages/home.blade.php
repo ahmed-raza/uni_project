@@ -27,7 +27,6 @@
         @include('ads.partials.search')
       </div>
     </div>
-    <div class="ads"></div>
     @if($featured_ads)
       <h2>Featured Ads</h2>
       <div class="flexslider">

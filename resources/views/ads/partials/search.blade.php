@@ -1,4 +1,4 @@
-{!! Form::open(['url'=>route('ads.index'), 'id'=>'ads-search']) !!}
+{!! Form::open(['url'=>route('ads.index'), 'id'=>'ads-search', 'method'=>'GET']) !!}
   <fieldset>
     <legend>Search</legend>
     <div class="row">
@@ -38,6 +38,7 @@
     </div>
   </fieldset>
 {!! Form::close() !!}
+@if(\Request::route()->getName() == 'ads.index')
 <script type="text/javascript">
   $('#ads-search').submit(function(e){
     e.preventDefault();
@@ -72,3 +73,4 @@
     });
   });
 </script>
+@endif

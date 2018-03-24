@@ -18,12 +18,12 @@ class AdsController extends Controller
     $this->middleware('userOrAdmin', ['only'=>['edit', 'delete']]);
   }
   public function index(Request $request) {
-    if ($request->ajax()) {
-      return $this->search($request);
-    }
     $ads = Ad::approved()->paginate(5);
     $cities = Ad::getCities();
     $categories_for_search = Category::pluck('name', 'id')->all();
+    if ($request || $request->ajax()) {
+      return $this->search($request, $cities, $categories_for_search);
+    }
     return view('ads.index', compact('ads', 'cities', 'categories_for_search'));
   }
   public function show($slug) {
@@ -105,7 +105,7 @@ class AdsController extends Controller
     }
     return $ad;
   }
-  private function search($request) {
+  private function search($request, $cities, $categories_for_search) {
     $title = $request->get('title');
     $category_id = (int)$request->get('category_id');
     $min_price = $request->get('min-price');
@@ -127,7 +127,10 @@ class AdsController extends Controller
             'category_id' => $category_id,
             'city' => $city,
             ]);
-        return view('ads.partials.results', compact('ads', 'request'))->render();
+        if ($request->ajax()) {
+          return view('ads.partials.results', compact('ads', 'request', 'cities', 'categories_for_search'))->render();
+        }
+        return view('ads.index', compact('ads', 'request', 'cities', 'categories_for_search'))->render();
     } else {
         return false;
     }
