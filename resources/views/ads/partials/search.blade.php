@@ -21,12 +21,16 @@
     </div>            
     <div class="row">
       <div class="col-lg-6">
-        <label for="price-min">Price min: <span id="price-min"></span></label>
-        <input type="range" name="price-min" id="price-min" value="200" min="0" max="10000">
+        <div class="price-range">
+          <label for="price-min">Price min: <span id="price-val"></span></label>
+          <input type="range" name="price_min" id="price-min" value="0" min="0" max="10000">
+        </div>
       </div>
       <div class="col-lg-6">
-        <label for="price-max">Price max: <span id="price-max"></span></label>
-        <input type="range" name="price-max" id="price-max" value="200" min="0" max="10000">
+        <div class="price-range">
+          <label for="price-max">Price max: <span id="price-val"></span></label>
+          <input type="range" name="price_max" id="price-max" value="0" min="0" max="10000">
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -38,18 +42,20 @@
     </div>
   </fieldset>
 {!! Form::close() !!}
-@if(\Request::route()->getName() == 'ads.index')
 <script type="text/javascript">
+  $('input[type="range"]').on('input',function(e){
+    $(this).parents('.price-range').find('#price-val').html($(e.target).val());
+  });
+  @if(\Request::route()->getName() == 'ads.index')
   $('#ads-search').submit(function(e){
     e.preventDefault();
     $('#loader').show();
-    $('.ads').addClass('overlay');
     var action = $(this).attr('action');
     var title = $(this).find('#title').val();
     var category_id = $(this).find('#category_id').val();
     var city = $(this).find('#city').val();
-    var price_min = $(this).find('#price-min').val();
-    var price_max = $(this).find('#price-max').val();
+    var min_price = $(this).find('#price-min').val();
+    var max_price = $(this).find('#price-max').val();
     var _token = "{{ csrf_token() }}";
     $.ajax({
       type: 'GET',
@@ -59,18 +65,16 @@
         title: title,
         category_id: category_id,
         city : city,
-        price_min : price_min,
-        price_max : price_max,
+        min_price : min_price,
+        max_price : max_price,
       },
       success: function(data){
         setTimeout(function(){
           $('.ads').html(data);
-          $('input#price-min').append(price_min);
           $('#loader').hide();
-          $('.ads').removeClass('overlay');
         }, 2000);
       }
     });
   });
+  @endif
 </script>
-@endif

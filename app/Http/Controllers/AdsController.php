@@ -108,8 +108,8 @@ class AdsController extends Controller
   private function search($request, $cities, $categories_for_search) {
     $title = $request->get('title');
     $category_id = (int)$request->get('category_id');
-    $min_price = $request->get('min-price');
-    $max_price = $request->get('max-price');
+    $min_price = (int)$request->get('min_price');
+    $max_price = (int)$request->get('max_price');
     $city = $request->get('city');
     $ads = Ad::where('title', 'like', "%$title%");
     if (isset($category_id) && !empty($category_id)) {
@@ -118,7 +118,7 @@ class AdsController extends Controller
     if (isset($city) && !empty($city)) {
       $ads->where('city', $city);
     }
-    if (isset($min_price) && isset($max_price)) {
+    if ($min_price && $max_price) {
       $ads->whereBetween('price', [$min_price, $max_price]);
     }
     if (!empty($ads)) {
