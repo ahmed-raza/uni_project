@@ -30,4 +30,7 @@ class User extends Authenticatable
     public function ads() {
         return $this->hasMany('App\Ad');        
     }
+    public function scopeGetTodaysUsers($query){
+        $query->whereRaw('Date(created_at) = CURDATE()')->get();
+    }
 }
