@@ -26,9 +26,13 @@ class AdminController extends Controller
   public function dashboardData(){
     $todays_ads = Ad::getTodaysAds();
     $todays_users = User::getTodaysUsers();
+    $total_users = User::all();
+    $total_ads = Ad::all();
     return json_encode([
       'todays_ads' => $todays_ads->count(),
       'todays_users' => $todays_users->count(),
+      'total_ads' => $total_ads->count(),
+      'total_users' => $total_users->count(),
     ]);
   }
 }
