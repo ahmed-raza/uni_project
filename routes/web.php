@@ -27,4 +27,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['admin']], function(){
   Route::get('ads', 'AdminController@ads')->name('admin.ads');
 });
 
+Route::group(['prefix'=>'api', 'middleware'=>['admin']], function(){
+  Route::get('dashboard/data', 'AdminController@dashboardData')->name('dashboard.data.json');
+});
+
 Auth::routes();
