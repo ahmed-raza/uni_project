@@ -8,15 +8,15 @@
     <div class="col-lg-6">
       <fieldset>
         <legend>Overall Analysis</legend>
-        <p><strong>Total Users:</strong> 1024</p>
-        <p><strong>Total Ads:</strong> 7863</p>
+        <p class="total-users"><strong>Total Users:</strong> <span id="total">0</span></p>
+        <p class="total-ads"><strong>Total Ads:</strong> <span id="total">0</span></p>
       </fieldset>
     </div>
     <div class="col-lg-6">
       <fieldset>
         <legend>Overall Analysis for the Day</legend>
-        <p><strong>Total Users today:</strong> 25</p>
-        <p><strong>Total Ads posted today:</strong> 68</p>
+        <p class="total-users-today"><strong>Users registered today:</strong> <span id="total">0</span></p>
+        <p class="total-ads-today"><strong>Ads posted today:</strong> <span id="total">0</span></p>
       </fieldset>
     </div>
   </div>
@@ -63,5 +63,12 @@
 {!! Form::open(['url'=>route('categories.store'), 'method'=>'POST']) !!}
   @include('admin.categories.partials._form', ['edit'=>false, 'title'=>'Add Category'])
 {!! Form::close() !!}
-
+<script type="text/javascript">
+  $.getJSON('/api/dashboard/data', function(result){
+    $('.total-users-today #total').text(result.todays_users);
+    $('.total-ads-today #total').text(result.todays_ads);
+    $('.total-ads #total').text(result.total_ads);
+    $('.total-users #total').text(result.total_users);
+  });
+</script>
 @stop
