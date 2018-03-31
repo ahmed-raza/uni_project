@@ -22,14 +22,14 @@
     <div class="row">
       <div class="col-lg-6">
         <div class="price-range">
-          <label for="price-min">Price min: <span id="price-val"></span></label>
-          <input type="range" name="price_min" id="price-min" value="0" min="0" max="10000">
+          <label for="price-min">Price min: <span id="price-val">0</span></label>
+          <input type="range" name="price_min" id="price-min" value="0" min="0" max="10000" step="500">
         </div>
       </div>
       <div class="col-lg-6">
         <div class="price-range">
-          <label for="price-max">Price max: <span id="price-val"></span></label>
-          <input type="range" name="price_max" id="price-max" value="0" min="0" max="10000">
+          <label for="price-max">Price max: <span id="price-val">10000</span></label>
+          <input type="range" name="price_max" id="price-max" value="10000" min="0" max="10000" step="500">
         </div>
       </div>
     </div>
