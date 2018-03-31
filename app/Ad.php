@@ -45,4 +45,7 @@ class Ad extends Model
   public function scopeGetFeatured($query){
     $query->where('approve', 1)->where('featured', 1);
   }
+  public function scopeGetTodaysAds($query){
+    $query->whereRaw('Date(created_at) = CURDATE()')->get();
+  }
 }
