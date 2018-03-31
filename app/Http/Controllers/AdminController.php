@@ -13,7 +13,7 @@ class AdminController extends Controller
     $categories = Category::orderBy('created_at', 'desc')->limit(5)->get();
     $users = User::orderBy('created_at', 'desc')->limit(5)->get();
     $ads = Ad::orderBy('created_at', 'desc')->limit(5)->get();
-    return view('admin.dashboard', compact('categories', 'users', 'ads'));
+    return view('admin.dashboard', compact('categories', 'users', 'ads', 'todays_ads', 'todays_users'));
   }
   public function users() {
     $users = User::paginate(10);
@@ -22,5 +22,13 @@ class AdminController extends Controller
   public function ads() {
     $ads = Ad::paginate(10);
     return view('admin.ads.index', compact('ads'));
+  }
+  public function dashboardData(){
+    $todays_ads = Ad::getTodaysAds();
+    $todays_users = User::getTodaysUsers();
+    return json_encode([
+      'todays_ads' => $todays_ads->count(),
+      'todays_users' => $todays_users->count(),
+    ]);
   }
 }
