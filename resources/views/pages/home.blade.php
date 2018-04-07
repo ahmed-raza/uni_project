@@ -27,7 +27,7 @@
         @include('ads.partials.search')
       </div>
     </div>
-    @if($featured_ads)
+    @unless($featured_ads->isEmpty())
       <h2>Featured Ads</h2>
       <div class="flexslider">
         <ul class="slides">
@@ -42,7 +42,7 @@
           @endforeach
         </ul>
       </div>
-    @endif
+    @endunless
     @if($latest_ads)
       <h2>Latest Ads</h2>
       @foreach($latest_ads->chunk(3) as $items)
