@@ -1,3 +1,18 @@
+.navbar-nav>li>a {
+  padding-top: 25px;
+}
+.navbar-default .navbar-nav>.active>a{
+  padding-bottom: 33px;
+}
+.navbar-brand {
+  background: url('../images/logo3.png') no-repeat;
+  background-size: 195px;
+  background-position: 10px 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 70px;
+  width: 190px;
+}
 .flexslider .desc {
   position: absolute;
   bottom: 0;
