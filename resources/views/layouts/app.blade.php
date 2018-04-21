@@ -17,14 +17,22 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2-bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('colorbox/colorbox.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
+    <script src="{{ asset('colorbox/jquery.colorbox-min.js') }}"></script>
     <script type="text/javascript" src="flexslider/jquery.flexslider.js"></script>
     {!! Html::script('ckeditor/ckeditor.js') !!}
     <script type="text/javascript">
         $(document).ready(function() {
             $('select').select2({
                 theme: "bootstrap"
+            });
+            $(".ad-group").colorbox({
+                rel:'ad-group',
+                transition:"fade",
+                width: "75%",
+                height: "75%",
             });
         });
     </script>
