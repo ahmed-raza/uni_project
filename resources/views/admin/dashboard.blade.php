@@ -51,7 +51,7 @@
         <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryModal">Add Category</button>
         <ul class="nav">
           @foreach ($categories as $category)
-          <li><a href="#">{{ $category->name }}</a></li>
+          <li><a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a></li>
           @endforeach
         </ul>
         <a href="{{ route('categories.index') }}" class="btn btn-sm btn-success">View All</a>

@@ -11,7 +11,7 @@
             <legend>Categories</legend>
             <div class="row">
               @foreach ($categories->chunk(3) as $items)
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-sm-4">
                   <ul class="nav">
                     @foreach ($items as $category)
                       <li><a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a></li>
@@ -48,7 +48,7 @@
       @foreach($latest_ads->chunk(3) as $items)
         <div class="row">
           @foreach($items as $ad)
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-sm-6">
               <div class="well">
                 @if($ad->images)
                   <img src="/files/ads/{{ $ad->id }}/{{ explode(';', $ad->images)[0] }}" alt="{{ $ad->title }}" width="320">

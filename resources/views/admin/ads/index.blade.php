@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         @foreach($ads as $ad)
-          <tr>
+          <tr class="{{ $ad->approve ? 'success' : 'warning' }}">
             <td>{{ $ad->id }}</td>
             <td>{{ Html::link(route('ads.show',$ad->slug), str_limit($ad->title, 20)) }}</td>
             <td>{{ $ad->user->name }}</td>
