@@ -11,11 +11,11 @@
 	    		<p><h4>View attached images:</h4></p>
 		    	<div class="row">
 		    		@foreach(array_filter(explode(';', $ad->images), 'strlen') as $image)
-							<div class="col-lg-4">
-								<a href="/files/ads/{{ $ad->id }}/{{ $image }}" class="ad-group">
-									<img src="/files/ads/{{ $ad->id }}/{{ $image }}" alt="{{ $ad->title }}" width="230" height="150">
-								</a>
-							</div>
+						<div class="col-lg-4 col-sm-4">
+							<a href="/files/ads/{{ $ad->id }}/{{ $image }}" class="ad-group">
+								<img src="/files/ads/{{ $ad->id }}/{{ $image }}" alt="{{ $ad->title }}" width="230" height="150">
+							</a>
+						</div>
 		    		@endforeach
 		    	</div>
 		    @endif
