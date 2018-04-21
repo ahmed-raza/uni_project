@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-theme.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/bootstrap-theme.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('flexslider/flexslider.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
@@ -45,18 +45,14 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Online Classifieds') }}
+                        {{-- {{ config('app.name') }} --}}
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        <li class="{!! Request::is('ads') ? 'active' : '' !!}"><a href="{{ route('ads.index') }}">Ads</a></li>
-                    </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+                        <li class="{!! Request::is('ads') ? 'active' : '' !!}"><a href="{{ route('ads.index') }}">Ads</a></li>
                         <li class={{ Request::is('ads/create') ? 'active' : '' }}><a href="{{ route('ads.create') }}">Post an Ad</a></li>
                         @if(Auth::check() && Auth::user()->role === 'admin')
                             <li class={{ Request::is('admin/dashboard') ? 'active' : '' }}><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
