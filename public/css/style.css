@@ -71,3 +71,7 @@
         transform:rotate(360deg);
     }
 }
+.flexslider .slides img {
+  width: 50%;
+  margin: 0 auto;
+}

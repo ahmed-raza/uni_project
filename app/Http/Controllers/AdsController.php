@@ -18,7 +18,7 @@ class AdsController extends Controller
     $this->middleware('userOrAdmin', ['only'=>['edit', 'delete']]);
   }
   public function index(Request $request) {
-    $ads = Ad::approved()->paginate(5);
+    $ads = Ad::approved()->orderBy('created_at', 'desc')->paginate(5);
     $cities = Ad::getCities();
     $categories_for_search = Category::pluck('name', 'id')->all();
     if ($request || $request->ajax()) {
@@ -36,7 +36,7 @@ class AdsController extends Controller
     return view('ads.create', compact('categories', 'cities'));
   }
   public function store(AdsRequest $request) {
-    if (count($request->file('images')) > 3) {
+    if ($request->file('images') !== null && count($request->file('images')) > 3) {
       return redirect()->back()->withInput($request->all())->withErrors('Maximum allowed number of images are 3.');
     }
     $ad = $this->createOrUpdate($request);
@@ -52,7 +52,7 @@ class AdsController extends Controller
     return abort(403);
   }
   public function update($id, AdsRequest $request) {
-    if (count($request->file('images')) > 3) {
+    if ($request->file('images') !== null && count($request->file('images')) > 3) {
       return redirect()->back()->withInput($request->all())->withErrors('Maximum allowed number of images are 3.');
     }
     $ad = $this->createOrUpdate($request, true, $id);
@@ -122,7 +122,7 @@ class AdsController extends Controller
       $ads->whereBetween('price', [$min_price, $max_price]);
     }
     if (!empty($ads)) {
-        $ads = $ads->approved()->paginate(5)->appends([
+        $ads = $ads->approved()->orderBy('created_at', 'desc')->paginate(4)->appends([
             'title' => $title,
             'category_id' => $category_id,
             'city' => $city,

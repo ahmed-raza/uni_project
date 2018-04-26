@@ -36,33 +36,31 @@
             <img src="/files/ads/{{ $featured_ad->id }}/{{ explode(';', $featured_ad->images)[0] }}" alt="ad image" height="400">
             <div class="desc">
               <h2>{!! Html::link(route('ads.show', $featured_ad->slug), $featured_ad->title) !!}</h2>
-              {!! str_limit($featured_ad->description, 150) !!}
+              {!! str_limit($featured_ad->description, 80) !!}
             </div>
           </li>
           @endforeach
         </ul>
       </div>
     @endunless
-    @if($latest_ads)
+    @unless($latest_ads->isEmpty())
       <h2>Latest Ads</h2>
-      @foreach($latest_ads->chunk(3) as $items)
-        <div class="row">
-          @foreach($items as $ad)
-            <div class="col-lg-4 col-sm-6">
-              <div class="well">
-                @if($ad->images)
-                  <img src="/files/ads/{{ $ad->id }}/{{ explode(';', $ad->images)[0] }}" alt="{{ $ad->title }}" width="320">
-                @endif
-                <h3>{!! Html::link(route('ads.show', $ad->slug), $ad->title) !!}</h3>
-                <em>{{ $ad->created_at->format('d F Y h:i a') }}</em>
-                {!! str_limit($ad->description, $ad->images ? 200 : 550) !!}
-                {!! Html::link(route('ads.show', $ad->slug),'See details') !!}
-              </div>
+      <div class="row">
+        @foreach($latest_ads as $ad)
+          <div class="col-lg-4 col-sm-6">
+            <div class="well">
+              @if($ad->images)
+                <img src="/files/ads/{{ $ad->id }}/{{ explode(';', $ad->images)[0] }}" alt="{{ $ad->title }}" width="320">
+              @endif
+              <h3>{!! Html::link(route('ads.show', $ad->slug), $ad->title) !!}</h3>
+              <em>{{ $ad->created_at->format('d F Y h:i a') }}</em>
+              {!! str_limit($ad->description, $ad->images ? 200 : 550) !!}
+              {!! Html::link(route('ads.show', $ad->slug),'See details') !!}
             </div>
-          @endforeach
-        </div>
-      @endforeach
-    @endif
+          </div>
+        @endforeach
+      </div>
+    @endunless
   </div>
   <script type="text/javascript">
     $(document).ready(function() {
