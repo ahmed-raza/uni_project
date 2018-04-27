@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\User;
 use App\Ad;
+use Carbon\Carbon;
+use DB;
 
 class AdminController extends Controller
 {
@@ -13,7 +15,9 @@ class AdminController extends Controller
     $categories = Category::orderBy('created_at', 'desc')->limit(5)->get();
     $users = User::orderBy('created_at', 'desc')->limit(5)->get();
     $ads = Ad::orderBy('created_at', 'desc')->limit(5)->get();
-    return view('admin.dashboard', compact('categories', 'users', 'ads', 'todays_ads', 'todays_users'));
+    $total_ads = Ad::all()->count();
+    $total_users = User::all()->count();
+    return view('admin.dashboard', compact('categories', 'users', 'ads', 'total_ads', 'total_users'));
   }
   public function users() {
     $users = User::paginate(10);
@@ -23,16 +27,17 @@ class AdminController extends Controller
     $ads = Ad::paginate(10);
     return view('admin.ads.index', compact('ads'));
   }
-  public function dashboardData(){
-    $todays_ads = Ad::getTodaysAds();
-    $todays_users = User::getTodaysUsers();
-    $total_users = User::all();
-    $total_ads = Ad::all();
-    return json_encode([
-      'todays_ads' => $todays_ads->count(),
-      'todays_users' => $todays_users->count(),
-      'total_ads' => $total_ads->count(),
-      'total_users' => $total_users->count(),
-    ]);
+  public function dashboardData(Request $request){
+    $entity = $request->input('entity');
+    $days = $request->input('days');
+    $dateFrom = Carbon::today();
+    $dateFrom = is_numeric($days) ? $dateFrom->subDays($days) : $dateFrom;
+    $dateFrom = $dateFrom->format('Y-m-d');
+    $query = DB::table($entity)->whereDate('created_at', '>=', $dateFrom)->get();
+    $data = [
+      'entity' => $entity,
+      'results' => $query
+    ];
+    return view('admin.partials.data')->with($data);
   }
 }
