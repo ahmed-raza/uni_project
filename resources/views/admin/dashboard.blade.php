@@ -4,19 +4,39 @@
 
 <div class="container">
   <h1>Admin Dashboard</h1>
-  <div class="row">
+  <div class="row analysis">
     <div class="col-lg-6">
       <fieldset>
-        <legend>Overall Analysis</legend>
-        <p class="total-users"><strong>Total Users:</strong> <span id="total">0</span></p>
-        <p class="total-ads"><strong>Total Ads:</strong> <span id="total">0</span></p>
+        <legend>Analysis of Ads</legend>
+        {!! Form::open(['url'=>'#', 'method'=>'POST', 'id'=>'dashboad-ads-form']) !!}
+          <input type="hidden" id="entity" value="ads">
+          <select name="days" id="ads-days" class="form-control ads-days">
+            <option value="">- Select -</option>
+            <option value="today">Today</option>
+            <option value="7">Last 7 days</option>
+            <option value="30">Last Month</option>
+          </select>
+        {!! Form::close() !!}
+        <div class="results">
+          <p class="total-ads"><strong>Total Ads:</strong> <span id="total">{{ $total_ads }}</span></p>
+        </div>
       </fieldset>
     </div>
     <div class="col-lg-6">
       <fieldset>
-        <legend>Overall Analysis for the Day</legend>
-        <p class="total-users-today"><strong>Users registered today:</strong> <span id="total">0</span></p>
-        <p class="total-ads-today"><strong>Ads posted today:</strong> <span id="total">0</span></p>
+        <legend>Analysis of Users</legend>
+        {!! Form::open(['url'=>'#', 'method'=>'POST', 'id'=>'dashboad-users-form']) !!}
+          <input type="hidden" id="entity" value="users">
+          <select name="days" id="users-days" class="form-control users-days">
+            <option value="">- Select -</option>
+            <option value="today">Today</option>
+            <option value="7">Last 7 days</option>
+            <option value="30">Last Month</option>
+          </select>
+        {!! Form::close() !!}
+        <div class="results">
+          <p class="total-users"><strong>Total Users:</strong> <span id="total">{{ $total_users }}</span></p>
+        </div>
       </fieldset>
     </div>
   </div>
@@ -64,11 +84,18 @@
   @include('admin.categories.partials._form', ['edit'=>false, 'title'=>'Add Category'])
 {!! Form::close() !!}
 <script type="text/javascript">
-  $.getJSON('/api/dashboard/data', function(result){
-    $('.total-users-today #total').text(result.todays_users);
-    $('.total-ads-today #total').text(result.todays_ads);
-    $('.total-ads #total').text(result.total_ads);
-    $('.total-users #total').text(result.total_users);
+  $('form select').on('change', function(e){
+    var entity = $(e.target).parents('form').find('#entity').val();
+    var token = $(e.target).parents('form').find('input[name="_token"]').val();
+    var days = $(e.target).val();
+    $.ajax({
+      url: '{{ route('dashboard.data.json') }}',
+      type: 'POST',
+      data: {_token: token, entity: entity, days: days},
+      success: function(data) {
+        $(e.target).parents('fieldset').find('.results').html(data);
+      }
+    });
   });
 </script>
 @stop

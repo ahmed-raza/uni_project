@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\User;
 use App\Ad;
+use Carbon\Carbon;
+use DB;
 
 class AdminController extends Controller
 {
@@ -13,7 +15,9 @@ class AdminController extends Controller
     $categories = Category::orderBy('created_at', 'desc')->limit(5)->get();
     $users = User::orderBy('created_at', 'desc')->limit(5)->get();
     $ads = Ad::orderBy('created_at', 'desc')->limit(5)->get();
-    return view('admin.dashboard', compact('categories', 'users', 'ads', 'todays_ads', 'todays_users'));
+    $total_ads = Ad::all()->count();
+    $total_users = User::all()->count();
+    return view('admin.dashboard', compact('categories', 'users', 'ads', 'total_ads', 'total_users'));
   }
   public function users() {
     $users = User::paginate(10);

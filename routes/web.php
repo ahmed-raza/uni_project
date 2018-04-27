@@ -35,7 +35,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['admin']], function(){
 });
 
 Route::group(['prefix'=>'api', 'middleware'=>['admin']], function(){
-  Route::get('dashboard/data', 'AdminController@dashboardData')->name('dashboard.data.json');
+  Route::post('dashboard/data', 'AdminController@dashboardData')->name('dashboard.data.json');
 });
 
 Auth::routes();
