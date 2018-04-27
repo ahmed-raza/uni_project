@@ -23,7 +23,6 @@ Route::get('categories/{id}/delete', 'CategoriesController@delete')->name('categ
 
 // User Routes
 Route::get('user/{id}/edit', 'UsersController@edit')->name('user.edit');
-Route::get('user/{id}/ads', 'UsersController@ads')->name('user.ads');
 Route::patch('user/{id}', 'UsersController@update')->name('user.update');
 Route::get('user/profile', 'UsersController@profile')->name('user.profile');
 
