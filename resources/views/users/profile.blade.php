@@ -7,7 +7,6 @@
   {!! Html::link(route('user.edit', $user->id), 'Edit Profile') !!}
   <p>{{ $user->name }}</p>
   <p>{{ $user->email }}</p>
-  <p>{{ $user->role }}</p>
 	<h1>Your Ads</h1>
 	<table class="table table-hover">
 	  <thead>

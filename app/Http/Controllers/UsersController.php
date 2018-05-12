@@ -17,10 +17,6 @@ class UsersController extends Controller
     $user = Auth::user();
     return view('users.profile', compact('user'));
   }
-  public function ads($id) {
-    $user = User::findOrFail($id);
-    return view('users.ads', compact('user'));
-  }
   public function edit($id) {
     $user = User::findOrFail($id);
     return view('users.edit', compact('user'));
