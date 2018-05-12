@@ -28,7 +28,10 @@ class AdsController extends Controller
   }
   public function show($slug) {
     $ad = Ad::where('slug', $slug)->first();
-    return view('ads.show', compact('ad'));
+    if ($ad) {
+      return view('ads.show', compact('ad'));
+    }
+    return abort(404);
   }
   public function create() {
     $categories = Category::pluck('name', 'id');
