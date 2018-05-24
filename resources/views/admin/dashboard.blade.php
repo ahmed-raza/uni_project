@@ -83,19 +83,4 @@
 {!! Form::open(['url'=>route('categories.store'), 'method'=>'POST']) !!}
   @include('admin.categories.partials._form', ['edit'=>false, 'title'=>'Add Category'])
 {!! Form::close() !!}
-<script type="text/javascript">
-  $('form select').on('change', function(e){
-    var entity = $(e.target).parents('form').find('#entity').val();
-    var token = $(e.target).parents('form').find('input[name="_token"]').val();
-    var days = $(e.target).val();
-    $.ajax({
-      url: '{{ route('dashboard.data.json') }}',
-      type: 'POST',
-      data: {_token: token, entity: entity, days: days},
-      success: function(data) {
-        $(e.target).parents('fieldset').find('.results').html(data);
-      }
-    });
-  });
-</script>
 @stop

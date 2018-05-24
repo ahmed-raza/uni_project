@@ -85,20 +85,3 @@
 <div class="form-group">
   {!! Form::submit('Post', ['class'=>'btn btn-block btn-primary']) !!}
 </div>
-<script type="text/javascript">
-  if($('input#pull_contact_info').is(':checked')) {
-    $('.custom-contact-info').hide();
-  }
-  $('input#pull_contact_info').change(function(){
-    $('.custom-contact-info').show();
-    if(this.checked) {
-      $('.custom-contact-info').hide();
-    }
-  });
-  $('a#remove-image').each(function() {
-    $(this).click(function(e) {
-      $(this).parents('.col-lg-4').find('input#removed-images').val($(this).attr('data-image-name'));
-      $(this).parents('.col-lg-4').find('.uploaded-image').remove();
-    });
-  });
-</script>

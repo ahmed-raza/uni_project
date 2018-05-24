@@ -18,23 +18,3 @@
 <div class="pagination">
   {!! $ads->render() !!}
 </div>
-<script type="text/javascript">
-  $(function() {
-    $('.pagination a').click(function(e) {
-        e.preventDefault();
-        var url = $(this).attr('href');
-        getAds(url);
-        window.history.pushState("", "", url);
-    });
-    function getAds(url) {
-        $.ajax({
-            url : url
-        }).done(function (data) {
-          $('.ads').attr('id', 'results');
-          $('#results').html(data);
-        }).fail(function () {
-            alert('Ads could not be loaded.');
-        });
-    }
-  });
-</script>

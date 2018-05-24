@@ -46,15 +46,4 @@
   {!! csrf_field() !!}
   @include('admin.categories.partials._form', ['edit'=>true, 'title'=>'Edit Category'])
 </form>
-
-<script type="text/javascript">
-  $('a#edit').on('click', function(e){
-    var id = e.target.getAttribute('data-id');
-    var name = e.target.getAttribute('data-name');
-    $('form#category-edit').find('input#category-name').val(name);
-    var action = $('form#category-edit').attr('action').split('/');
-    action = action[0] +"/"+ action[1] +"/"+ action[2] +"/"+ action[3] +"/"+ id;
-    $('form#category-edit').attr('action', action).val(name);
-  });
-</script>
 @stop

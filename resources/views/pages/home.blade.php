@@ -62,17 +62,4 @@
       </div>
     @endunless
   </div>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('input#price-min').change(function(){
-        $(this).parents().find('span#price-min').text($(this).val());
-      });
-      $('input#price-max').change(function(){
-        $(this).parents().find('span#price-max').text($(this).val());
-      });
-      $('.flexslider').flexslider({
-        animation: "slide"
-      });
-    });
-  </script>
 @stop
