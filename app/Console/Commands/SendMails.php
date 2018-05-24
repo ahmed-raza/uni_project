@@ -16,6 +16,8 @@ class SendMails extends Command
     public function handle()
     {
         Mail::send('emails.reminder', [],function($message){
+            $message->subject('Reminder!');
+            $message->from('alex@creativefaze.com', 'MeAhmed');
             $message->to('ahmed.raza@square63.com');
         });
     }
