@@ -11,5 +11,19 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.scripts([
+    'resources/assets/js/app.js',
+    'resources/assets/js/select2.min.js',
+    'resources/assets/ckeditor/ckeditor.js',
+    'resources/assets/colorbox/jquery.colorbox-min.js',
+    'resources/assets/flexslider/jquery.flexslider.js',
+    'resources/assets/js/custom.js',
+  ], 'public/js/all.js');
+mix.styles([
+    'resources/assets/css/app.css',
+    'resources/assets/flexslider/flexslider.css',
+    'resources/assets/css/style.css',
+    'resources/assets/css/select2.min.css',
+    'resources/assets/css/select2-bootstrap.min.css',
+    'resources/assets/colorbox/colorbox.css',
+], 'public/css/all.css');
