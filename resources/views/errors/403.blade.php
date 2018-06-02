@@ -1,3 +1,3 @@
 @extends('errors::layout')
 @section('title', '403')
-@section('message', 'Unauthorized Access')
+@section('message', 'You are not authorized to acces this page.')

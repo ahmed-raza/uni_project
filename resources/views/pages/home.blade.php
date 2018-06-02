@@ -43,7 +43,7 @@
         </ul>
       </div>
     @endunless
-    @if($latest_ads)
+    @unless($latest_ads->isEmpty())
       <h2>Latest Ads</h2>
       @foreach($latest_ads->chunk(3) as $items)
         <div class="row">
@@ -54,7 +54,7 @@
                   <img src="/files/ads/{{ $ad->id }}/{{ explode(';', $ad->images)[0] }}" alt="{{ $ad->title }}" width="320">
                 @endif
                 <h3>{!! Html::link(route('ads.show', $ad->slug), $ad->title) !!}</h3>
-                <em>{{ $ad->created_at->format('d F Y h:i a') }}</em>
+                <em>{{ $ad->created_at->diffForHumans() }}</em>
                 {!! str_limit($ad->description, $ad->images ? 200 : 550) !!}
                 {!! Html::link(route('ads.show', $ad->slug),'See details') !!}
               </div>
@@ -62,7 +62,7 @@
           @endforeach
         </div>
       @endforeach
-    @endif
+    @endunless
   </div>
   <script type="text/javascript">
     $(document).ready(function() {

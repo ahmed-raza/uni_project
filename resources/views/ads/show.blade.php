@@ -22,6 +22,7 @@
     		<div class="well">
     			<fieldset>
     				<legend>Ad Details</legend>
+    				<p><strong>Post on: </strong>{{ $ad->created_at->format('d M Y h:i a') }}</p>
 				    <p><strong>Location: </strong>{!! $ad->city !!}</p>
 				    <p><strong>Price: </strong>{!! $ad->price !!} PKR</p>
 				    <p><strong>Category: </strong>{!! Html::link(route('categories.show', $ad->category->id), $ad->category->name) !!}</p>
