@@ -23,16 +23,17 @@ class AdminController extends Controller
     $ads = Ad::paginate(10);
     return view('admin.ads.index', compact('ads'));
   }
-  public function dashboardData(){
-    $todays_ads = Ad::getTodaysAds();
-    $todays_users = User::getTodaysUsers();
-    $total_users = User::all();
-    $total_ads = Ad::all();
-    return json_encode([
-      'todays_ads' => $todays_ads->count(),
-      'todays_users' => $todays_users->count(),
-      'total_ads' => $total_ads->count(),
-      'total_users' => $total_users->count(),
-    ]);
+  public function dashboardData(Request $request){
+    $entity = $request->input('entity');
+    $days = $request->input('days');
+    $dateFrom = Carbon::today();
+    $dateFrom = is_numeric($days) ? $dateFrom->subDays($days) : $dateFrom;
+    $dateFrom = $dateFrom->format('Y-m-d');
+    $query = DB::table($entity)->whereDate('created_at', '>=', $dateFrom)->get();
+    $data = [
+      'entity' => $entity,
+      'results' => $query
+    ];
+    return view('admin.partials.data')->with($data);
   }
 }

@@ -12,6 +12,7 @@
           <th>Email</th>
           <th>Role</th>
           <th>Total Ads</th>
+          <th>Join On</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -23,6 +24,7 @@
             <td>{{ $user->email }}</td>
             <td>{{ $user->role }}</td>
             <td>{{ count($user->ads) }}</td>
+            <td>{{ $user->created_at }}</td>
             <td>{!! Html::link(route('user.edit', $user->id), 'Edit') !!}</td>
           </tr>
         @endforeach

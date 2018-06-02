@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
           'name'=>env('MY_NAME'),
           'email'=>env('MY_EMAIL'),
           'password'=>bcrypt('password'),
-          'role'=>'admin'
+          'role'=>'admin',
+          'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+          'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
         ]);
       DB::table('categories')->insert([
           'name'=>'Electronics',
