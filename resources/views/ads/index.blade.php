@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <div class="container">
+  <div class="container ads-index">
     <h1>Ads</h1>
     <div class="row">
       <div class="col-lg-8">

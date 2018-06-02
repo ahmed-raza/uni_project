@@ -69,7 +69,7 @@ $(document).ready(function() {
   $('input[type="range"]').on('input',function(e){
     $(this).parents('.price-range').find('#price-val').html($(e.target).val());
   });
-  $('#ads-search').submit(function(e){
+  $('.ads-index #ads-search').submit(function(e){
     e.preventDefault();
     $('#loader').show();
     var action = $(this).attr('action');
@@ -78,7 +78,7 @@ $(document).ready(function() {
     var city = $(this).find('#city').val();
     var min_price = $(this).find('#price-min').val();
     var max_price = $(this).find('#price-max').val();
-    var _token = "{{ csrf_token() }}";
+    var _token = $(this).find('input[name="_token"]').val();
     $.ajax({
       type: 'GET',
       url: action,
@@ -97,12 +97,6 @@ $(document).ready(function() {
         }, 2000);
       }
     });
-  });
-  $('input#price-min').change(function(){
-    $(this).parents().find('span#price-min').text($(this).val());
-  });
-  $('input#price-max').change(function(){
-    $(this).parents().find('span#price-max').text($(this).val());
   });
   $('.flexslider').flexslider({
     animation: "slide"

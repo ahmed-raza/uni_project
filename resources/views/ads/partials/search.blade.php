@@ -1,4 +1,5 @@
 {!! Form::open(['url'=>route('ads.index'), 'id'=>'ads-search', 'method'=>'GET']) !!}
+{!! csrf_field() !!}
   <fieldset>
     <legend>Search</legend>
     <div class="row">
@@ -28,7 +29,7 @@
       </div>
       <div class="col-lg-6">
         <div class="price-range">
-          <label for="price-max">Price max: <span id="price-val">{{ app('request')->get('price_min') ? app('request')->get('price_max') : 10000 }}</span></label>
+          <label for="price-max">Price max: <span id="price-val">{{ app('request')->get('price_min') ? app('request')->get('price_max') : 0 }}</span></label>
           {!! Form::range('price_max', 10000, ['id'=>'price-max', 'min'=>'0', 'max'=>'10000', 'step'=>'500']) !!}
         </div>
       </div>
