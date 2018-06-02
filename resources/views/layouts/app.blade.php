@@ -26,6 +26,16 @@
             $('select').select2({
                 theme: "bootstrap"
             });
+            $('#ads-days, #users-days').select2({
+                theme: "bootstrap",
+                minimumResultsForSearch: -1
+            });
+            $(".ad-group").colorbox({
+                rel:'ad-group',
+                transition:"fade",
+                width: "75%",
+                height: "75%",
+            });
         });
     </script>
 </head>
