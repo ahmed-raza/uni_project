@@ -6,6 +6,12 @@
     <h1>{{ $ad->title }}</h1>
     <div class="row">
     	<div class="col-lg-8">
+		    @if(Auth::check() && Auth::user()->id === $ad->user_id)
+		    	<div class="actions pull-right">
+		    		<a href="{{ route('ads.edit', $ad->id) }}" class="btn btn-xs btn-primary">Edit</a>
+		    		<a href="{{ route('ads.delete', $ad->id) }}" class="btn btn-xs btn-danger">Delete</a>
+		    	</div>
+		    @endif
 		    {!! $ad->description !!}
 		    @if($ad->images)
 	    		<p><h4>View attached images:</h4></p>
