@@ -33,4 +33,7 @@ class User extends Authenticatable
     public function scopeGetTodaysUsers($query){
         $query->whereRaw('Date(created_at) = CURDATE()')->get();
     }
+    public function is_admin() {
+        return $this->role == 'admin' ? true : false;
+    }
 }

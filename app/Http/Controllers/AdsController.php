@@ -28,8 +28,9 @@ class AdsController extends Controller
   }
   public function show($slug) {
     $ad = Ad::where('slug', $slug)->first();
+    $canPerformActions = Auth::check() && (Auth::user()->id === $ad->user_id || Auth::user()->is_admin()) ? true : false;
     if ($ad) {
-      return view('ads.show', compact('ad'));
+      return view('ads.show', compact('ad', 'canPerformActions'));
     }
     return abort(404);
   }

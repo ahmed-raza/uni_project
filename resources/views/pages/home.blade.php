@@ -10,7 +10,7 @@
           <fieldset>
             <legend>Categories</legend>
             <div class="row">
-              @foreach ($categories->chunk(3) as $items)
+              @foreach ($categories->chunk(6) as $items)
                 <div class="col-lg-4 col-sm-4">
                   <ul class="nav">
                     @foreach ($items as $category)
