@@ -45,7 +45,7 @@
     @endunless
     @unless($latest_ads->isEmpty())
       <h2>Latest Ads</h2>
-      <div class="row">
+      <div class="row latest-ads">
         @foreach($latest_ads as $ad)
           <div class="col-lg-4 col-sm-6">
             <div class="well">

@@ -21,7 +21,7 @@
             <div class="{{ $ad->images ? 'col-lg-8 col-sm-9' : 'col-lg-12' }}">
               <h3>{{ Html::link(route('ads.show',$ad->slug), $ad->title) }}</h3>
               <em>{{ $ad->created_at->diffForHumans() }}</em>
-              {!! str_limit($ad->description, 200) !!}
+              {!! str_limit($ad->description, 100) !!}
             </div>
           </div>
           @endforeach
