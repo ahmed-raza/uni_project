@@ -75,3 +75,18 @@
   width: 50%;
   margin: 0 auto;
 }
+.price-range {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.price-range label {
+  width: 100%;
+}
+input.price {
+  display: inline;
+  float: right;
+  height: 3%;
+  padding: 3px;
+  font-size: 10px;
+  width: 55%;
+}

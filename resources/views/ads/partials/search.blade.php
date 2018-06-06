@@ -22,14 +22,14 @@
     <div class="row">
       <div class="col-lg-6">
         <div class="price-range">
-          <label for="price-min">Price min: <span id="price-val">{{ app('request')->get('price_min') ? app('request')->get('price_min') : 0 }}</span></label>
-          {!! Form::range('price_min', 0, ['id'=>'price-min', 'min'=>'0', 'max'=>'10000', 'step'=>'500']) !!}
+          <label for="price-min">Price min: <input type="number" id="min-price" value="{{ app('request')->get('price_min') ? app('request')->get('price_min') : 0 }}" min="0" max="2000000" class="input-sm price form-control"></label>
+          {!! Form::range('price_min', 0, ['id'=>'price-min', 'min'=>'0', 'max'=>'2000000', 'step'=>'500']) !!}
         </div>
       </div>
       <div class="col-lg-6">
         <div class="price-range">
-          <label for="price-max">Price max: <span id="price-val">{{ app('request')->get('price_min') ? app('request')->get('price_max') : 10000 }}</span></label>
-          {!! Form::range('price_max', 10000, ['id'=>'price-max', 'min'=>'0', 'max'=>'10000', 'step'=>'500']) !!}
+          <label for="price-max">Price max: <input type="number" id="max-price" value="{{ app('request')->get('price_max') ? app('request')->get('price_max') : 2000000 }}" min="0" max="2000000" class="input-sm price form-control"></label>
+          {!! Form::range('price_max', '2000000', ['id'=>'price-max', 'min'=>'0', 'max'=>'2000000', 'step'=>'500']) !!}
         </div>
       </div>
     </div>
@@ -44,7 +44,10 @@
 {!! Form::close() !!}
 <script type="text/javascript">
   $('input[type="range"]').on('input',function(e){
-    $(this).parents('.price-range').find('#price-val').html($(e.target).val());
+    $(this).parents('.price-range').find('input.price').val($(e.target).val());
+  });
+  $('input.price').keyup(function(e){
+    $(this).parents('.price-range').find('input[type="range"]').val($(e.target).val());
   });
   @if(\Request::route()->getName() == 'ads.index')
   $('#ads-search').submit(function(e){
