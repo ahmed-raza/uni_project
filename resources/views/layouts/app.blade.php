@@ -17,10 +17,10 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2-bootstrap.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('ckeditor_full/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
-    <script type="text/javascript" src="flexslider/jquery.flexslider.js"></script>
-    {!! Html::script('ckeditor/ckeditor.js') !!}
+    <script src="{{ asset('flexslider/jquery.flexslider.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('select').select2({

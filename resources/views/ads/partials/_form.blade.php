@@ -16,19 +16,31 @@
   <div class="col-lg-6">
     <div class="form-group">
       {!! Form::label('category') !!}
-      {!! Form::select('category_id', $categories, $edit ? $ad->category->id : null, ['class'=>'form-control']) !!}
+      {!! Form::select('category_id',
+        $categories,
+        $edit ? $ad->category->id : null,
+        [
+          'class'=>'form-control',
+          'placeholder'=>'Select Category'
+        ]) !!}
     </div>
   </div>
   <div class="col-lg-6">
     <div class="form-group">
       {!! Form::label('city') !!}
-      {!! Form::select('city', $cities, $edit ? $ad->city : null, ['class'=>'form-control']) !!}
+      {!! Form::select('city',
+        $cities,
+        $edit ? $ad->city : null,
+        [
+          'class'=>'form-control',
+          'placeholder'=>'Select City'
+        ]) !!}
     </div>
   </div>
 </div>
 <div class="form-group">
   {!! Form::label('description') !!}
-  {!! Form::textarea('description', null, ['class'=>'ckeditor']) !!}
+  {!! Form::textarea('description', null, ['id'=>'editor1']) !!}
 </div>
 <div class="row">
   <div class="{{ $edit ? 'col-lg-6' : 'col-lg-12' }}">
@@ -86,6 +98,40 @@
   {!! Form::submit('Post', ['class'=>'btn btn-block btn-primary']) !!}
 </div>
 <script type="text/javascript">
+  CKEDITOR.replace('editor1', {
+    extraPlugins: "imagebrowser",
+    imageBrowser_listUrl: "imagebrowser.json",
+    toolbar: [
+      {
+        name: 'basicstyles',
+        items: [
+          'Bold', 'Italic', 'Underline', 'Strike'
+        ]
+      },
+      {
+        name: 'clipboard',
+        items: [
+          'Copy', 'Cut', 'Paste'
+        ]
+      },
+      {
+        name: 'links',
+        items: [
+          'Link', 'Unlink'
+        ]
+      },
+      {
+        name: 'paragraph',
+        groups: [
+          'list'
+        ],
+        items: [
+          'NumberedList',
+          'BulletedList'
+        ]
+      }
+    ]
+  });
   if($('input#pull_contact_info').is(':checked')) {
     $('.custom-contact-info').hide();
   }
