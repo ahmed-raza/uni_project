@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Ad extends Model
 {
@@ -47,5 +48,10 @@ class Ad extends Model
   }
   public function scopeGetTodaysAds($query){
     $query->whereRaw('Date(created_at) = CURDATE()')->get();
+  }
+  public function scopeLatestAds($query){
+    $query->where('created_at','>',Carbon::now()->subDay())
+          ->where('created_at', '<', Carbon::now())
+          ->where('approve', 1);
   }
 }
